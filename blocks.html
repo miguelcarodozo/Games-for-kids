@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        * {
+            margin: 0;
+            justify-content: center;
+            font-family: "Courier New", Courier, monospace;
+
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+        }
+
+        #img1 {
+            width: 400px;
+            height: auto;
+        }
+
+        form {
+            align-items: center;
+            display: grid;
+        }
+
+        #feedback {
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lógica matemática</h1>
+    <div id="content">
+        <img id="img1"
+            src="https://carrefourbr.vtexassets.com/arquivos/ids/132929008/9b0a3c51165a47e286e3c0ea840bcb5a.jpg?v=638334528329530000"></img>
+        <form>
+            <p>Selecione uma opção:</p>
+
+            <label for="opcao1">
+                <input type="radio" id="opcao1" name="opcao" value="1" checked>
+                Opção 1</label>
+
+            <label for="opcao2">
+                <input type="radio" id="opcao2" name="opcao" value="2">
+                Opção 2</label>
+
+            <label for="opcao3">
+                <input type="radio" id="opcao3" name="opcao" value="3">
+                Opção 3</label>
+        </form>
+    </div>
+    <div id="feedback">
+        <button type="click" id="confirm" class="desabilitado">Confirmar</button>
+        <p id="answer"></p>
+    </div>
+</body>
+<script>
+    document.getElementById("confirm").onclick = function () {
+        const radio1 = document.getElementById("opcao1");
+        const radio2 = document.getElementById("opcao2");
+        const radio3 = document.getElementById("opcao3");
+        const text = document.getElementById("answer");
+
+        if (radio1.checked) {
+            text.textContent = "Errado";
+        } else if (radio2.checked) {
+            text.textContent = "Certo";
+        } else if (radio3.checked) {
+            text.textContent = "Errado";
+        }
+    }
+</script>
+
+</html>
