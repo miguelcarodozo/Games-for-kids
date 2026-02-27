@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Jogo para aprender</title>
+  <style>
+    * {
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      /* Centraliza verticalmente */
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      text-align: center;
+      margin: 10px 0;
+      color: white;
+      text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+      font-weight: 700;
+      letter-spacing: 2px;
+      animation: fadeInDown 0.8s ease;
+    }
+
+    #results {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 15px 0;
+      perspective: 1000px;
+    }
+
+    .boxes {
+      width: 100px;
+      height: 100px;
+      background: white;
+      border: none;
+      border-radius: 20px;
+      font-size: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+      color: #764ba2;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      animation: flipIn 0.6s ease;
+    }
+
+    .boxes:hover {
+      transform: translateY(-5px) rotateX(5deg);
+      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    #numbers {
+      text-align: center;
+      padding: 15px 25px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 60px;
+      margin: 10px 0;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+
+    #numbers button {
+      width: 80px;
+      height: 80px;
+      border: none;
+      border-radius: 50%;
+      font-size: 2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .habilitado {
+      background: linear-gradient(145deg, #ffd93d, #ffb347);
+      color: white;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+      transform: scale(1);
+    }
+
+    .habilitado:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(145deg, #ffb347, #ff8c42);
+    }
+
+    .habilitado:active {
+      transform: scale(0.95);
+    }
+
+    .desabilitado {
+      background: linear-gradient(145deg, #c0c0c0, #a0a0a0);
+      color: #666;
+      cursor: not-allowed;
+      opacity: 0.7;
+      transform: scale(0.95);
+      box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    #feedback {
+      padding: 10px;
+      text-align: center;
+      font-size: 1.8rem;
+      margin-top: 10px;
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #confirmBtn {
+      padding: 15px 40px;
+      font-size: 1.6rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      animation: pulse 2s infinite;
+      width: fit-content;
+      min-width: 200px;
+    }
+
+    .off {
+      background: linear-gradient(145deg, #808080, #666666);
+      color: #ccc;
+      cursor: not-allowed;
+      opacity: 0.7;
+      animation: none;
+      /* Remove a animação quando desabilitado */
+    }
+
+    .on {
+      background: linear-gradient(145deg, #4CAF50, #45a049);
+      color: white;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .on:hover {
+      transform: scale(1.05);
+      box-shadow: 0 12px 25px rgba(76, 175, 80, 0.4);
+    }
+
+    .on:active {
+      transform: scale(0.95);
+    }
+
+    #text {
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+      min-height: 50px;
+      animation: glow 2s ease-in-out infinite;
+      margin: 5px 0;
+    }
+
+    /*animações*/
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes flipIn {
+      from {
+        opacity: 0;
+        transform: perspective(400px) rotateX(90deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: perspective(400px) rotateX(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      50% {
+        box-shadow: 0 12px 25px rgba(255, 255, 255, 0.4);
+      }
+
+      100% {
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      }
+    }
+
+    @keyframes glow {
+
+      0%,
+      100% {
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+      }
+
+      50% {
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 2px 2px 0 rgba(0, 0, 0, 0.3);
+      }
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.5rem;
+      }
+
+      .boxes {
+        width: 70px;
+        height: 70px;
+        font-size: 2.2rem;
+      }
+
+      #numbers button {
+        width: 60px;
+        height: 60px;
+        font-size: 1.6rem;
+      }
+
+      #confirmBtn {
+        padding: 12px 30px;
+        font-size: 1.4rem;
+        min-width: 180px;
+      }
+
+      #text {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        justify-content: flex-start;
+        /* Em telas muito pequenas, permite rolagem */
+        padding: 5px;
+      }
+
+      h1 {
+        font-size: 2rem;
+        margin: 5px 0;
+      }
+
+      .boxes {
+        width: 50px;
+        height: 50px;
+        font-size: 1.6rem;
+      }
+
+      #numbers button {
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+      }
+
+      #confirmBtn {
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        min-width: 150px;
+      }
+
+      #text {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Lógica matemática</h1>
+  <div id="results">
+    <div class="boxes" id="box1">?</div>
+    <div class="boxes" id="box2">?</div>
+    <div class="boxes" id="box3">?</div>
+    <div class="boxes" id="box4">?</div>
+    <div class="boxes" id="box5">?</div>
+  </div>
+  <div id="numbers">
+    <button type="button" class="habilitado" id="number1"></button>
+    <button type="button" class="habilitado" id="number2"></button>
+    <button type="button" class="habilitado" id="number3"></button>
+    <button type="button" class="habilitado" id="number4"></button>
+    <button type="button" class="habilitado" id="number5"></button>
+  </div>
+  <div id="feedback">
+    <button type="click" class="off" id="confirmBtn">Confirmar</button>
+    <p id="text"></p>
+  </div>
+</body>
+<script>
+  var counter = 1;
+
+  var conditionFor1 = true;
+  var conditionFor2 = true;
+  var conditionFor3 = true;
+  var conditionFor4 = true;
+  var conditionFor5 = true;
+
+  var boxes = document.querySelectorAll(".boxes");
+  var botoes = document.querySelectorAll("#numbers button");
+  var confirmBtn = document.getElementById("confirmBtn");
+
+  var text = document.getElementById("text").textContent;
+
+  var systems = [[1, 2, 3, 4, 5], [3, 7, 9, 5, 2], [15, 7, 18, 13, 16]];
+
+  var systemIndex = 0;
+
+  var number1 = document.getElementById("number1");
+  var number2 = document.getElementById("number2");
+  var number3 = document.getElementById("number3");
+  var number4 = document.getElementById("number4");
+  var number5 = document.getElementById("number5");
+
+    function restart() {
+
+    boxes.forEach((box) => {
+      box.textContent = "?";
+    });
+
+    botoes.forEach((botao) => {
+      botao.classList.remove("desabilitado");
+      botao.classList.add("habilitado");
+    });
+
+    conditionFor1 = true;
+    conditionFor2 = true;
+    conditionFor3 = true;
+    conditionFor4 = true;
+    conditionFor5 = true;
+
+    counter = 1;
+
+    confirmBtn.classList.remove("on");
+    confirmBtn.classList.add("off");
+  }
+
+  function loadQuestion() {
+    if (systemIndex < systems.length) {
+      number1.textContent = systems[systemIndex][0];
+      number2.textContent = systems[systemIndex][1];
+      number3.textContent = systems[systemIndex][2];
+      number4.textContent = systems[systemIndex][3];
+      number5.textContent = systems[systemIndex][4];
+      restart();
+
+    } else {
+      confirmBtn.textContent = "Próximo exercício";
+      confirmBtn.onclick = function () {
+        window.location.href = "blocks.html";
+      };
+    }
+  }
+
+  loadQuestion();
+
+
+  function checkResult() {
+    var pos1 = document.getElementById("box1").textContent;
+    var pos2 = document.getElementById("box2").textContent;
+    var pos3 = document.getElementById("box3").textContent;
+    var pos4 = document.getElementById("box4").textContent;
+    var pos5 = document.getElementById("box5").textContent;
+
+    if (Number(pos1) < Number(pos2) && Number(pos2) < Number(pos3) &&
+      Number(pos3) < Number(pos4) && Number(pos4) < Number(pos5)) {
+      confirmBtn.textContent = "Próximo";
+      systemIndex++;
+      loadQuestion();
+    } else {
+      restart();
+      text = "Tente de novo";
+    }
+  }
+
+  function fullAttempt() {
+    if (counter == 6) {
+      confirmBtn.classList.remove("off");
+      confirmBtn.classList.add("on");
+    }
+  }
+
+
+  number5.onclick = function () {
+    if (conditionFor5) {
+      document.getElementById("box" + counter).textContent =
+        document.getElementById("number5").textContent;
+      counter++;
+      conditionFor5 = false;
+      this.classList.add("desabilitado");
+      this.classList.remove("habilitado");
+
+      fullAttempt();
+    }
+  };
+
+  number4.onclick = function () {
+    if (conditionFor4) {
+      document.getElementById("box" + counter).textContent =
+        document.getElementById("number4").textContent;
+      counter++;
+      conditionFor4 = false;
+      this.classList.add("desabilitado");
+      this.classList.remove("habilitado");
+
+      fullAttempt();
+    }
+  };
+  number3.onclick = function () {
+    if (conditionFor3) {
+      document.getElementById("box" + counter).textContent =
+        document.getElementById("number3").textContent;
+      counter++;
+      conditionFor3 = false;
+      this.classList.add("desabilitado");
+      this.classList.remove("habilitado");
+      fullAttempt();
+    }
+  };
+
+  number2.onclick = function () {
+    if (conditionFor2) {
+      document.getElementById("box" + counter).textContent =
+        document.getElementById("number2").textContent;
+      counter++;
+      conditionFor2 = false;
+      this.classList.add("desabilitado");
+      this.classList.remove("habilitado");
+
+      fullAttempt();
+    }
+  };
+
+  number1.onclick = function () {
+    if (conditionFor1) {
+      document.getElementById("box" + counter).textContent =
+        document.getElementById("number1").textContent;
+      counter++;
+      conditionFor1 = false;
+      this.classList.add("desabilitado");
+      this.classList.remove("habilitado");
+
+      fullAttempt();
+    }
+  };
+
+  confirmBtn.onclick = function () {
+    checkResult();
+  }
+
+</script>
+
+</html>

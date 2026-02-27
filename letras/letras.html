@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Letras</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #667eea;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            padding-bottom: 70px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            text-align: center;
+            color: #ffd93d;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease 0.1s both;
+        }
+
+        #main {
+            display: flex;
+            gap: 20px;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgb(94, 41, 119);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        button {
+            padding: 20px;
+            font-size: 2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        button:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        button:active {
+            transform: scale(0.95);
+        }
+
+        button:disabled {
+            opacity: 0.8;
+            cursor: default;
+            background: black !important;
+            color: white;
+        }
+
+        button:disabled:hover {
+            transform: scale(0.95);
+        }
+
+        .a {
+            background: #ff9999;
+            color: white;
+        }
+
+        .b {
+            background: #99ff99;
+            color: white;
+        }
+
+        .c {
+            background: #9999ff;
+            color: white;
+        }
+
+        .d {
+            background: #ffd93d;
+            color: white;
+        }
+
+        .e {
+            background: #d1ff04;
+            color: white;
+        }
+
+        .f {
+            background: #99ff99;
+            color: white;
+        }
+
+        .g {
+            background: #c0f04f;
+            color: white;
+        }
+
+        .h {
+            background: #f5d96c;
+            color: white;
+        }
+
+        .i {
+            background: #9e9056;
+            color: white;
+        }
+
+        .j {
+            background: #72ff72;
+            color: white;
+        }
+
+        .k {
+            background: #42ffa1;
+            color: white;
+        }
+
+        .l {
+            background: #fa0808;
+            color: white;
+        }
+
+        .m {
+            background: #ff8c42;
+            color: white;
+        }
+
+        .n {
+            background: #ffb347;
+            color: white;
+        }
+
+        .o {
+            background: #ffd93d;
+            color: white;
+        }
+
+        .p {
+            background: #fcff4e;
+            color: white;
+        }
+
+        .q {
+            background: #f09927;
+            color: white;
+        }
+
+        .r {
+            background: #f83f3c88;
+            color: white;
+        }
+
+        .s {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .t {
+            background: #ff8c42;
+            color: white;
+        }
+
+        .u {
+            background: #ffb347;
+            color: white;
+        }
+
+        .v {
+            background: #ffd93d;
+            color: white;
+        }
+
+        .w {
+            background: #a0d6b4;
+            color: white;
+        }
+
+        .x {
+            background: #b19cd9;
+            color: white;
+        }
+
+        .y {
+            background: #f7cac9;
+            color: white;
+        }
+
+        .z {
+            background: #9e9056;
+            color: white;
+        }
+
+        footer {
+            display: flex;
+            gap: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #000000;
+            color: white;
+            text-align: center;
+            justify-content: end;
+            padding: 15px;
+            font-weight: bolder;
+        }
+
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 15px 25px rgba(255, 255, 255, 0.3);
+            }
+
+            100% {
+                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 2px 2px 0 rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+            }
+
+            #content {
+                gap: 10px;
+                padding: 15px;
+            }
+
+            button {
+                font-size: 1.5rem;
+                padding: 15px;
+            }
+
+            #text {
+                font-size: 1.5rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Aprendendo as letras</h1>
+    <h3 id="goal">Ache as letras com esse som</h3>
+    <div id="main">
+        <div class="content" id="fase1">
+        </div>
+        <div id="fase2" class="hidden">
+        </div>
+        <div id="fase3" class="hidden">
+        </div>
+        <div id="fase4" class="hidden">
+        </div>
+        <button id="playLetter" type="click">
+            <img width="20" height="20" src="https://img.icons8.com/ios/50/high-volume--v1.png" alt="high-volume--v1" />
+        </button>
+    </div>
+    <footer>
+        <p>@ Miguel Cardozo - 2026</p>
+        <a href="www.linkedin.com/in/miguelcardozo-">
+            <img src="https://img.icons8.com/?size=100&id=102748&format=png&color=FFFFFF" width="20px">
+        </a>
+        <a href="https://github.com/miguelcarodozo">
+            <img src="https://img.icons8.com/?size=100&id=12599&format=png&color=FFFFFF" width="20px">
+        </a>
+    </footer>
+</body>
+<script>
+    var fase1 = document.getElementById("fase1");
+    var fase2 = document.getElementById("fase2");
+    var fase3 = document.getElementById("fase3");
+    var fase4 = document.getElementById("fase4");
+
+    var goal = document.getElementById("goal");
+    var playLetter = document.getElementById("playLetter");
+    var letraAtual = "B";
+
+    var totalA = 0;
+    var totalB = 0;
+    var totalC = 0;
+    var totalD = 0;
+
+    for (var i = 0; i < 20; i++) {
+        if (i % 2 == 0) {
+            fase1.innerHTML += `
+                <button type='click' class='a'>A</button>`
+            totalA++
+        } else if (i % 3 == 0 || i % 5 == 0) {
+            fase1.innerHTML += `
+                <button type='click' class='b'>B</button>`;
+            totalB++;
+
+        } else if (i % 7 == 0) {
+            fase1.innerHTML += `
+                <button type='click' class='c'>C</button>`
+            totalC++;
+        } else if (i % 2 != 0) {
+            fase1.innerHTML += `
+                <button type = "click" class='d'>D</button>`
+            totalD++;
+        }
+    }
+
+    var totalBLeft = totalB;
+    var totalCLeft = totalC;
+    var totalALeft = totalA;
+    var totalDLeft = totalD;
+
+    function playAuto() {
+        new Audio("audio" + letraAtual + ".m4a").play().catch(error => {
+            console.log("Áudio não pôde ser reproduzido automaticamente:", error);
+            goal.textContent = "Clique no botão de som para ouvir";
+        });
+    }
+
+    function playWithDelay() {
+        setTimeout(() => {
+            var audio = new Audio("audio" + letraAtual + ".m4a");
+            audio.load();
+            audio.play().catch(e => console.log("Erro ao reproduzir:", e));
+        }, 2000);
+    }
+
+    playAuto();
+
+    playLetter.onclick = function () {
+        playAuto();
+    }
+    const buttonA = document.querySelectorAll(".a");
+    buttonA.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioA.m4a").play();
+            totalALeft--;
+            button.disabled = true;
+            goal.textContent = "Continue";
+            if (totalALeft == 0) {
+                letraAtual = "B";
+                goal.textContent = "Próxima letra";
+                playWithDelay();
+            }
+        })
+    })
+
+    const buttonB = document.querySelectorAll(".b");
+    buttonB.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioB.m4a").play();
+            if (totalALeft == 0) {
+                button.disabled = true;
+                totalBLeft--;
+                goal.textContent = "Continue";
+                if (totalBLeft == 0) {
+                    letraAtual = "C";
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonC = document.querySelectorAll(".c");
+    buttonC.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioC.m4a").play();
+            if (totalALeft == 0) {
+                totalCLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalCLeft == 0) {
+                    letraAtual = "D";
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonD = document.querySelectorAll(".d");
+    buttonD.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioD.m4a").play();
+            if (totalCLeft == 0) {
+                totalDLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalDLeft == 0) {
+                    letraAtual = 'E';
+                    goal.textContent = "Próxima letra";
+                    fase1.classList.remove("content");
+                    fase1.classList.add("hidden");
+                    fase2.classList.remove("hidden");
+                    fase2.classList.add("content");
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    var totalE = 0;
+    var totalF = 0;
+    var totalG = 0;
+    var totalH = 0;
+    var totalI = 0;
+    var totalJ = 0;
+    var totalK = 0;
+
+    for (var i = 0; i < 8; i++) {
+
+        if (i == 2 || i == 3 || i == 5 || i == 7 || i == 11 || i == 13 || i == 17 || i == 19) {
+            fase2.innerHTML += `<button class='e'>E</button>`;
+            totalE++;
+        }
+
+        if (i == 4 || i == 16) {
+            fase2.innerHTML += `<button class='f'>F</button>`;
+            totalF++;
+        }
+
+        if (i >= 5 && i <= 10) {
+            fase2.innerHTML += `<button class='g'>G</button>`;
+            totalG++;
+        }
+
+        if (i % 4 == 0 && i != 0) {
+            fase2.innerHTML += `<button class='h'>H</button>`;
+            totalH++;
+        }
+
+        if (i % 10 == 0 || i % 10 == 1 || i % 10 == 2) {
+            fase2.innerHTML += `<button class='i'>I</button>`;
+            totalI++;
+        }
+
+        if (i % 2 != 0 && i % 3 != 0 && i % 5 != 0) {
+            fase2.innerHTML += `<button class='j'>J</button>`;
+            totalJ++;
+        }
+
+        if (i == 0 || i == 1 || i == 2 || i == 3 || i == 5 || i == 8 || i == 13) {
+            fase2.innerHTML += `<button class='k'>K</button>`;
+            totalK++;
+        }
+    }
+
+    fase2.innerHTML += `<button class ="h">H</button>`;
+    totalH++;
+
+
+    var totalELeft = totalE;
+    var totalFLeft = totalF;
+    var totalGLeft = totalG;
+    var totalHLeft = totalH;
+    var totalILeft = totalI;
+    var totalJLeft = totalJ;
+    var totalKLeft = totalK;
+
+    playAuto();
+
+    const buttonE = document.querySelectorAll(".e");
+    buttonE.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioE.m4a").play();
+            button.disabled = true;
+            totalELeft--;
+            goal.textContent = "Continue";
+            if (totalELeft == 0) {
+                letraAtual = "F";
+                goal.textContent = "Próxima letra";
+                playWithDelay();
+            }
+        })
+    })
+
+    const buttonF = document.querySelectorAll(".f");
+    buttonF.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioF.m4a").play();
+            if (totalELeft == 0) {
+                totalFLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalFLeft == 0) {
+                    letraAtual = "G"
+                    goal.textContent = "Próxima letra";
+                    playWithDelay()
+                }
+            }
+        })
+    })
+
+    const buttonG = document.querySelectorAll(".g");
+    buttonG.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioG.m4a").play();
+            if (totalFLeft == 0) {
+                totalGLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+
+                if (totalGLeft == 0) {
+                    letraAtual = "H";
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonH = document.querySelectorAll(".h");
+    buttonH.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioH.m4a").play();
+            if (totalGLeft == 0) {
+                totalHLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalHLeft == 0) {
+                    letraAtual = "I";
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    });
+
+    const buttonI = document.querySelectorAll(".i");
+    buttonI.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioI.m4a").play();
+            if (totalHLeft == 0) {
+                totalILeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalILeft == 0) {
+                    letraAtual = "J";
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonJ = document.querySelectorAll(".j");
+    buttonJ.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioJ.m4a").play();
+            if (totalILeft == 0) {
+                totalJLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalJLeft == 0) {
+                    letraAtual = "K";
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonK = document.querySelectorAll(".k");
+    buttonK.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioK.m4a").play();
+            if (totalJLeft == 0) {
+                totalKLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalKLeft == 0) {
+                    letraAtual = 'L';
+                    goal.textContent = "Próxima letra";
+                    fase2.classList.remove("content");
+                    fase2.classList.add("hidden");
+                    fase3.classList.remove("hidden");
+                    fase3.classList.add("content");
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    var totalL = 0;
+    var totalM = 0;
+    var totalN = 0;
+    var totalO = 0;
+    var totalP = 0;
+    var totalQ = 0;
+    var totalR = 0;
+
+    for (var i = 0; i < 15; i++) {
+        if (i == 2 || i == 7) {
+            fase3.innerHTML += `<button class='l'>L</button>`;
+            totalL++;
+        }
+
+        if (i % 3 == 0) {
+            fase3.innerHTML += `<button class='m'>M</button>`;
+            totalM++;
+        }
+
+        if (i >= 10 && i <= 13) {
+            fase3.innerHTML += `<button class='n'>N</button>`;
+            totalN++;
+        }
+
+        if (i >= 12) {
+            fase3.innerHTML += `<button class='o'>O</button>`;
+            totalO++;
+        }
+
+        if (i == 8 || i == 14) {
+            fase3.innerHTML += `<button class='p'>P</button>`;
+            totalP++;
+        }
+
+        if (i == 7 || i == 10) {
+            fase3.innerHTML += `<button class='q'>Q</button>`;
+            totalQ++;
+        }
+
+        if (i % 6 == 0 && i != 0) {
+            fase3.innerHTML += `<button class='r'>R</button>`;
+            totalR++;
+        }
+    }
+
+    var totalLLeft = totalL;
+    var totalMLeft = totalM;
+    var totalNLeft = totalN;
+    var totalOLeft = totalO;
+    var totalPLeft = totalP;
+    var totalQLeft = totalQ;
+    var totalRLeft = totalR;
+
+    const buttonL = document.querySelectorAll(".l");
+    buttonL.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioL.m4a").play();
+            button.disabled = true;
+            totalLLeft--;
+            goal.textContent = "Continue";
+            if (totalLLeft == 0) {
+                letraAtual = 'M';
+                playWithDelay();
+            }
+        })
+    })
+
+    const buttonM = document.querySelectorAll(".m");
+    buttonM.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioM.m4a").play();
+            if (totalLLeft == 0) {
+                totalMLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalMLeft == 0) {
+                    letraAtual = 'N';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonN = document.querySelectorAll(".n");
+    buttonN.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioN.m4a").play();
+            if (totalMLeft == 0) {
+                totalNLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalNLeft == 0) {
+                    letraAtual = 'O';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonO = document.querySelectorAll(".o");
+    buttonO.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioO.m4a").play();
+            if (totalNLeft == 0) {
+                totalOLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalOLeft == 0) {
+                    letraAtual = 'P';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    });
+
+    const buttonP = document.querySelectorAll(".p");
+    buttonP.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioP.m4a").play();
+            if (totalOLeft == 0) {
+                totalPLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalPLeft == 0) {
+                    letraAtual = 'Q';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonQ = document.querySelectorAll(".q");
+    buttonQ.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioQ.m4a").play();
+            if (totalPLeft == 0) {
+                totalQLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalQLeft == 0) {
+                    letraAtual = 'R';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonR = document.querySelectorAll(".r");
+    buttonR.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioR.m4a").play();
+            if (totalQLeft == 0) {
+                totalRLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalRLeft == 0) {
+                    fase3.classList.remove("content");
+                    fase3.classList.add("hidden");
+                    fase4.classList.remove("hidden");
+                    fase4.classList.add("content");
+                    letraAtual = 'S';
+                    goal.textContent = "Próxima letra";
+                }
+            }
+        })
+    })
+
+    var totalS = 0;
+    var totalT = 0;
+    var totalU = 0;
+    var totalV = 0;
+    var totalW = 0;
+    var totalX = 0;
+    var totalY = 0;
+    var totalZ = 0;
+
+    for (var i = 0; i < 14; i++) {
+        if (i == 3 || i == 8 || i == 13) {
+            fase4.innerHTML += `<button class='s'>S</button>`;
+            totalS++;
+        }
+
+        if (i % 4 == 0 && i != 0) {
+            fase4.innerHTML += `<button class='t'>T</button>`;
+            totalT++;
+        }
+
+        if (i >= 6 && i <= 8) {
+            fase4.innerHTML += `<button class='u'>U</button>`;
+            totalU++;
+        }
+
+        if (i == 6 || i == 12) {
+            fase4.innerHTML += `<button class='v'>V</button>`;
+            totalV++;
+        }
+
+        if (i > 10 && i < 15) {
+            fase4.innerHTML += `<button class='w'>W</button>`;
+            totalW++;
+        }
+
+        if (i == 2 || i == 11) {
+            fase4.innerHTML += `<button class='x'>X</button>`;
+            totalX++;
+        }
+
+        if (i % 7 == 0 && i != 0 || i == 6) {
+            fase4.innerHTML += `<button class='y'>Y</button>`;
+            totalY++;
+        }
+
+        if (i == 9 || i == 8) {
+            fase4.innerHTML += `<button class='z'>Z</button>`;
+            totalZ++;
+        }
+    }
+
+    var totalSLeft = totalS;
+    var totalTLeft = totalT;
+    var totalULeft = totalU;
+    var totalVLeft = totalV;
+    var totalWLeft = totalW;
+    var totalXLeft = totalX;
+    var totalYLeft = totalY;
+    var totalZLeft = totalZ;
+
+    const buttonS = document.querySelectorAll(".s");
+    buttonS.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioS.m4a").play();
+            button.disabled = true;
+            totalSLeft--;
+            goal.textContent = "Continue";
+            if (totalSLeft == 0) {
+                letraAtual = 'T';
+                playWithDelay();
+            }
+        })
+    })
+
+    const buttonT = document.querySelectorAll(".t");
+    buttonT.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioT.m4a").play();
+            if (totalSLeft == 0) {
+                totalTLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalTLeft == 0) {
+                    letraAtual = 'U';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonU = document.querySelectorAll(".u");
+    buttonU.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioU.m4a").play();
+            if (totalTLeft == 0) {
+                totalULeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalULeft == 0) {
+                    letraAtual = 'V';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonV = document.querySelectorAll(".v");
+    buttonV.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioV.m4a").play();
+            if (totalULeft == 0) {
+                totalVLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalVLeft == 0) {
+                    letraAtual = 'W';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    });
+
+    const buttonW = document.querySelectorAll(".w");
+    buttonW.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioW.m4a").play();
+            if (totalVLeft == 0) {
+                totalWLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalWLeft == 0) {
+                    letraAtual = 'X';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonX = document.querySelectorAll(".x");
+    buttonX.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioX.m4a").play();
+            if (totalWLeft == 0) {
+                totalXLeft--;
+                button.disabled = true;
+                if (totalXLeft == 0) {
+                    letraAtual = 'Y';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonY = document.querySelectorAll(".y");
+    buttonY.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioY.m4a").play();
+            if (totalXLeft == 0) {
+                totalYLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalYLeft == 0) {
+                    letraAtual = 'Z';
+                    goal.textContent = "Próxima letra";
+                    playWithDelay();
+                }
+            }
+        })
+    })
+
+    const buttonZ = document.querySelectorAll(".z");
+    buttonZ.forEach(button => {
+        button.addEventListener('click', function () {
+            new Audio("audioZ.m4a").play();
+            if (totalYLeft == 0) {
+                totalZLeft--;
+                button.disabled = true;
+                goal.textContent = "Continue";
+                if (totalZLeft == 0) {
+                    goal.textContent = "Parabéns, terminou todas as letras!";
+                }
+            }
+
+        })
+    })
+
+</script>
+
+</html>
