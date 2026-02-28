@@ -88,8 +88,8 @@
         button:disabled {
             opacity: 0.8;
             cursor: default;
-            background: black !important;
-            color: white;
+            background: white !important;
+            color: black;
         }
 
         button:disabled:hover {
@@ -371,32 +371,43 @@
 
     const startBtn = document.getElementById("startBtn");
 
-    var totalA = 0;
-    var totalB = 0;
-    var totalC = 0;
-    var totalD = 0;
-    var totalE = 0;
-    var totalF = 0;
-    var totalG = 0;
-    var totalH = 0;
-    var totalI = 0;
-    var totalJ = 0;
-    var totalK = 0;
-    var totalL = 0;
-    var totalM = 0;
-    var totalN = 0;
-    var totalO = 0;
-    var totalP = 0;
-    var totalQ = 0;
-    var totalR = 0;
-    var totalS = 0;
-    var totalT = 0;
-    var totalU = 0;
-    var totalV = 0;
-    var totalW = 0;
-    var totalX = 0;
-    var totalY = 0;
-    var totalZ = 0;
+    var group1 = [
+        { name: "a", count: 0 },
+        { name: "b", count: 0 },
+        { name: "c", count: 0 },
+        { name: "d", count: 0 }
+    ];
+
+    var group2 = [
+        { name: "f", count: 0 },
+        { name: "h", count: 0 },
+        { name: "e", count: 0 },
+        { name: "g", count: 0 },
+        { name: "i", count: 0 },
+        { name: "k", count: 0 },
+        { name: "j", count: 0 }
+    ];
+
+    var group3 = [
+        { name: "l", count: 0 },
+        { name: "m", count: 0 },
+        { name: "n", count: 0 },
+        { name: "o", count: 0 },
+        { name: "p", count: 0 },
+        { name: "q", count: 0 },
+        { name: "r", count: 0 }
+    ];
+
+    var group4 = [
+        { name: "s", count: 0 },
+        { name: "t", count: 0 },
+        { name: "u", count: 0 },
+        { name: "v", count: 0 },
+        { name: "w", count: 0 },
+        { name: "x", count: 0 },
+        { name: "y", count: 0 },
+        { name: "z", count: 0 }
+    ];
 
     function playAuto() {
         new Audio("audio" + letraAtual + ".m4a").play().catch(error => {
@@ -413,175 +424,81 @@
         }, 2000);
     }
 
-    for (var i = 0; i < 20; i++) {
-        if (i % 2 == 0) {
-            fase1.innerHTML += `
-                <button type='click' class='a'>A</button>`
-            totalA++
-        } else if (i % 3 == 0 || i % 5 == 0) {
-            fase1.innerHTML += `
-                <button type='click' class='b'>B</button>`;
-            totalB++;
-
-        } else if (i % 7 == 0) {
-            fase1.innerHTML += `
-                <button type='click' class='c'>C</button>`
-            totalC++;
-        } else if (i % 2 != 0) {
-            fase1.innerHTML += `
-                <button type = "click" class='d'>D</button>`
-            totalD++;
-        }
-    }
-    var totalBLeft = totalB;
-    var totalCLeft = totalC;
-    var totalALeft = totalA;
-    var totalDLeft = totalD;
-
-    for (var i = 0; i < 8; i++) {
-
-        if (i == 2 || i == 3 || i == 5 || i == 7 || i == 11 || i == 13 || i == 17 || i == 19) {
-            fase2.innerHTML += `<button class='e'>E</button>`;
-            totalE++;
-        }
-
-        if (i == 4 || i == 16) {
-            fase2.innerHTML += `<button class='f'>F</button>`;
-            totalF++;
-        }
-
-        if (i >= 5 && i <= 10) {
-            fase2.innerHTML += `<button class='g'>G</button>`;
-            totalG++;
-        }
-
-        if (i % 4 == 0 && i != 0) {
-            fase2.innerHTML += `<button class='h'>H</button>`;
-            totalH++;
-        }
-
-        if (i % 10 == 0 || i % 10 == 1 || i % 10 == 2) {
-            fase2.innerHTML += `<button class='i'>I</button>`;
-            totalI++;
-        }
-
-        if (i % 2 != 0 && i % 3 != 0 && i % 5 != 0) {
-            fase2.innerHTML += `<button class='j'>J</button>`;
-            totalJ++;
-        }
-
-        if (i == 0 || i == 1 || i == 2 || i == 3 || i == 5 || i == 8 || i == 13) {
-            fase2.innerHTML += `<button class='k'>K</button>`;
-            totalK++;
+    function createGroups(group, fase) {
+        for (let i = 0; i < 20; i++) {
+            let random = Math.floor(Math.random() * group.length);
+            fase.innerHTML += `<button class="${group[random].name}">${group[random].name.toUpperCase()}</button>`;
+            group[random].count++;
         }
     }
 
-    fase2.innerHTML += `<button class ="h">H</button>`;
-    totalH++;
+    createGroups(group1, fase1);
+    createGroups(group2, fase2);
+    createGroups(group3, fase3);
+    createGroups(group4, fase4);
 
-    var totalELeft = totalE;
-    var totalFLeft = totalF;
-    var totalGLeft = totalG;
-    var totalHLeft = totalH;
-    var totalILeft = totalI;
-    var totalJLeft = totalJ;
-    var totalKLeft = totalK;
+    var groups = [group1, group2, group3, group4];
+    var quants = [];
+    var letters = [];
 
-    for (var i = 0; i < 15; i++) {
-        if (i == 2 || i == 7) {
-            fase3.innerHTML += `<button class='l'>L</button>`;
-            totalL++;
-        }
+    groups.forEach(group => {
+        group.forEach(letter => {
+            quants.push(letter.count);
+            letters.push(letter.name);
+        })
+    })
 
-        if (i % 3 == 0) {
-            fase3.innerHTML += `<button class='m'>M</button>`;
-            totalM++;
-        }
+    letters.forEach((letter, index) => {
+        var buttons = document.querySelectorAll("." + letter);
+        buttons.forEach((button) => {
+            button.addEventListener('click', function () {
+                if (index == 0 || quants[index - 1] == 0) {
+                    new Audio("correto.m4a").play().catch(e => console.log("Erro ao reproduzir:", e));
+                    button.disabled = true;
+                    button.textContent = "";
+                    button.innerHTML = `<img width="15px" height="15px" src="https://img.icons8.com/?size=100&id=3061&format=png&color=000000" alt="checked--v1"/>`;
+                    quants[index]--;
+                    goal.textContent = "Continue!";
+                    if (quants[index] == 0) {
+                        letraAtual = letters[index + 1];
+                        playWithDelay();
+                        disableButtonsTemporarily();
+                        if (letraAtual == "f") {
+                            fase1.classList.remove("content");
+                            fase1.classList.add("hidden");
+                            fase2.classList.remove("hidden");
+                            fase2.classList.add("content");
+                            goal.textContent = "Ótimo! Agora encontre as próximas letras!";
+                        }else if (letraAtual == "l") {
+                            fase2.classList.remove("content");
+                            fase2.classList.add("hidden");
+                            fase3.classList.remove("hidden");
+                            fase3.classList.add("content");
+                            goal.textContent = "Muito bem! Agora encontre as próximas letras!";
+                        } else if (letraAtual == "s") {
+                            fase3.classList.remove("content");
+                            fase3.classList.add("hidden");
+                            fase4.classList.remove("hidden");
+                            fase4.classList.add("content");
+                            goal.textContent = "Excelente! Agora encontre as últimas letras!";
+                        } else if (index == letters.length - 1) {
+                            fase4.classList.remove("content");
+                            fase4.classList.add("hidden");
+                            playLetter.classList.add("hidden");
+                            goal.textContent = "Parabéns! Você encontrou todas as letras!";
+                        }   else{
+                            goal.textContent = "Próxima letra!";
+                        }
 
-        if (i >= 10 && i <= 13) {
-            fase3.innerHTML += `<button class='n'>N</button>`;
-            totalN++;
-        }
+                    }
+                } else {
+                    goal.textContent = "Escute o som novamente!";
+                    new Audio("errado.m4a").play().catch(e => console.log("Erro ao reproduzir:", e));
+                }
+            })
 
-        if (i >= 12) {
-            fase3.innerHTML += `<button class='o'>O</button>`;
-            totalO++;
-        }
-
-        if (i == 8 || i == 14) {
-            fase3.innerHTML += `<button class='p'>P</button>`;
-            totalP++;
-        }
-
-        if (i == 7 || i == 10) {
-            fase3.innerHTML += `<button class='q'>Q</button>`;
-            totalQ++;
-        }
-
-        if (i % 6 == 0 && i != 0) {
-            fase3.innerHTML += `<button class='r'>R</button>`;
-            totalR++;
-        }
-    }
-
-    var totalLLeft = totalL;
-    var totalMLeft = totalM;
-    var totalNLeft = totalN;
-    var totalOLeft = totalO;
-    var totalPLeft = totalP;
-    var totalQLeft = totalQ;
-    var totalRLeft = totalR;
-
-    for (var i = 0; i < 14; i++) {
-        if (i == 3 || i == 8 || i == 13) {
-            fase4.innerHTML += `<button class='s'>S</button>`;
-            totalS++;
-        }
-
-        if (i % 4 == 0 && i != 0) {
-            fase4.innerHTML += `<button class='t'>T</button>`;
-            totalT++;
-        }
-
-        if (i >= 6 && i <= 8) {
-            fase4.innerHTML += `<button class='u'>U</button>`;
-            totalU++;
-        }
-
-        if (i == 6 || i == 12) {
-            fase4.innerHTML += `<button class='v'>V</button>`;
-            totalV++;
-        }
-
-        if (i > 10 && i < 15) {
-            fase4.innerHTML += `<button class='w'>W</button>`;
-            totalW++;
-        }
-
-        if (i == 2 || i == 11) {
-            fase4.innerHTML += `<button class='x'>X</button>`;
-            totalX++;
-        }
-
-        if (i % 7 == 0 && i != 0 || i == 6) {
-            fase4.innerHTML += `<button class='y'>Y</button>`;
-            totalY++;
-        }
-
-        if (i == 9 || i == 8) {
-            fase4.innerHTML += `<button class='z'>Z</button>`;
-            totalZ++;
-        }
-    }
-
-    var totalSLeft = totalS;
-    var totalTLeft = totalT;
-    var totalULeft = totalU;
-    var totalVLeft = totalV;
-    var totalWLeft = totalW;
-    var totalXLeft = totalX;
-    var totalYLeft = totalY;
-    var totalZLeft = totalZ;
+        })
+    })
 
     var buttons = document.querySelectorAll("button");
     function disableButtonsTemporarily() {
@@ -608,479 +525,6 @@
         disableButtonsTemporarily();
     }
 
-    const buttonA = document.querySelectorAll(".a");
-    buttonA.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioA.m4a").play();
-            totalALeft--;
-            button.disabled = true;
-            goal.textContent = "Continue!";
-            if (totalALeft == 0) {
-                letraAtual = "B";
-                goal.textContent = "Próxima letra!";
-                playWithDelay();
-                disableButtonsTemporarily();
-            }
-        })
-    })
-
-    const buttonB = document.querySelectorAll(".b");
-    buttonB.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioB.m4a").play();
-            if (totalALeft == 0) {
-                button.disabled = true;
-                totalBLeft--;
-                goal.textContent = "Continue!";
-                if (totalBLeft == 0) {
-                    letraAtual = "C";
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonC = document.querySelectorAll(".c");
-    buttonC.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioC.m4a").play();
-            if (totalALeft == 0) {
-                totalCLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalCLeft == 0) {
-                    letraAtual = "D";
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonD = document.querySelectorAll(".d");
-    buttonD.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioD.m4a").play();
-            if (totalCLeft == 0) {
-                totalDLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalDLeft == 0) {
-                    letraAtual = 'E';
-                    goal.textContent = "Próxima letra!";
-                    fase1.classList.remove("content");
-                    fase1.classList.add("hidden");
-                    fase2.classList.remove("hidden");
-                    fase2.classList.add("content");
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-
-
-
-
-    const buttonE = document.querySelectorAll(".e");
-    buttonE.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioE.m4a").play();
-            button.disabled = true;
-            totalELeft--;
-            goal.textContent = "Continue!";
-            if (totalELeft == 0) {
-                letraAtual = "F";
-                goal.textContent = "Próxima letra!";
-                playWithDelay();
-                disableButtonsTemporarily();
-            }
-        })
-    })
-
-    const buttonF = document.querySelectorAll(".f");
-    buttonF.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioF.m4a").play();
-            if (totalELeft == 0) {
-                totalFLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalFLeft == 0) {
-                    letraAtual = "G"
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay()
-                }
-            }
-        })
-    })
-
-    const buttonG = document.querySelectorAll(".g");
-    buttonG.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioG.m4a").play();
-            if (totalFLeft == 0) {
-                totalGLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-
-                if (totalGLeft == 0) {
-                    letraAtual = "H";
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonH = document.querySelectorAll(".h");
-    buttonH.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioH.m4a").play();
-            if (totalGLeft == 0) {
-                totalHLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalHLeft == 0) {
-                    letraAtual = "I";
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    });
-
-    const buttonI = document.querySelectorAll(".i");
-    buttonI.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioI.m4a").play();
-            if (totalHLeft == 0) {
-                totalILeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalILeft == 0) {
-                    letraAtual = "J";
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonJ = document.querySelectorAll(".j");
-    buttonJ.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioJ.m4a").play();
-            if (totalILeft == 0) {
-                totalJLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalJLeft == 0) {
-                    letraAtual = "K";
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonK = document.querySelectorAll(".k");
-    buttonK.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioK.m4a").play();
-            if (totalJLeft == 0) {
-                totalKLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalKLeft == 0) {
-                    letraAtual = 'L';
-                    goal.textContent = "Próxima letra!";
-                    fase2.classList.remove("content");
-                    fase2.classList.add("hidden");
-                    fase3.classList.remove("hidden");
-                    fase3.classList.add("content");
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-
-
-    const buttonL = document.querySelectorAll(".l");
-    buttonL.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioL.m4a").play();
-            button.disabled = true;
-            totalLLeft--;
-            goal.textContent = "Continue!";
-            if (totalLLeft == 0) {
-                letraAtual = 'M';
-                playWithDelay();
-                disableButtonsTemporarily();
-            }
-        })
-    })
-
-    const buttonM = document.querySelectorAll(".m");
-    buttonM.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioM.m4a").play();
-            if (totalLLeft == 0) {
-                totalMLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalMLeft == 0) {
-                    letraAtual = 'N';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonN = document.querySelectorAll(".n");
-    buttonN.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioN.m4a").play();
-            if (totalMLeft == 0) {
-                totalNLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalNLeft == 0) {
-                    letraAtual = 'O';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonO = document.querySelectorAll(".o");
-    buttonO.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioO.m4a").play();
-            if (totalNLeft == 0) {
-                totalOLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalOLeft == 0) {
-                    letraAtual = 'P';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    });
-
-    const buttonP = document.querySelectorAll(".p");
-    buttonP.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioP.m4a").play();
-            if (totalOLeft == 0) {
-                totalPLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalPLeft == 0) {
-                    letraAtual = 'Q';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonQ = document.querySelectorAll(".q");
-    buttonQ.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioQ.m4a").play();
-            if (totalPLeft == 0) {
-                totalQLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalQLeft == 0) {
-                    letraAtual = 'R';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonR = document.querySelectorAll(".r");
-    buttonR.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioR.m4a").play();
-            if (totalQLeft == 0) {
-                totalRLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalRLeft == 0) {
-                    fase3.classList.remove("content");
-                    fase3.classList.add("hidden");
-                    fase4.classList.remove("hidden");
-                    fase4.classList.add("content");
-                    letraAtual = 'S';
-                    goal.textContent = "Próxima letra!";
-                }
-            }
-        })
-    })
-
-
-
-
-    const buttonS = document.querySelectorAll(".s");
-    buttonS.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioS.m4a").play();
-            button.disabled = true;
-            totalSLeft--;
-            goal.textContent = "Continue!";
-            if (totalSLeft == 0) {
-                letraAtual = 'T';
-                playWithDelay();
-                disableButtonsTemporarily();
-            }
-        })
-    })
-
-    const buttonT = document.querySelectorAll(".t");
-    buttonT.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioT.m4a").play();
-            if (totalSLeft == 0) {
-                totalTLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalTLeft == 0) {
-                    letraAtual = 'U';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonU = document.querySelectorAll(".u");
-    buttonU.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioU.m4a").play();
-            if (totalTLeft == 0) {
-                totalULeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalULeft == 0) {
-                    letraAtual = 'V';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonV = document.querySelectorAll(".v");
-    buttonV.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioV.m4a").play();
-            if (totalULeft == 0) {
-                totalVLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalVLeft == 0) {
-                    letraAtual = 'W';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    });
-
-    const buttonW = document.querySelectorAll(".w");
-    buttonW.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioW.m4a").play();
-            if (totalVLeft == 0) {
-                totalWLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalWLeft == 0) {
-                    letraAtual = 'X';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonX = document.querySelectorAll(".x");
-    buttonX.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioX.m4a").play();
-            if (totalWLeft == 0) {
-                totalXLeft--;
-                button.disabled = true;
-                if (totalXLeft == 0) {
-                    letraAtual = 'Y';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonY = document.querySelectorAll(".y");
-    buttonY.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioY.m4a").play();
-            if (totalXLeft == 0) {
-                totalYLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalYLeft == 0) {
-                    letraAtual = 'Z';
-                    goal.textContent = "Próxima letra!";
-                    playWithDelay();
-                    disableButtonsTemporarily();
-                }
-            }
-        })
-    })
-
-    const buttonZ = document.querySelectorAll(".z");
-    buttonZ.forEach(button => {
-        button.addEventListener('click', function () {
-            new Audio("audioZ.m4a").play();
-            if (totalYLeft == 0) {
-                totalZLeft--;
-                button.disabled = true;
-                goal.textContent = "Continue!";
-                if (totalZLeft == 0) {
-                    goal.textContent = "Parabéns, terminou todas as letras!";
-                }
-            }
-
-        })
-    })
 </script>
 
 </html>
