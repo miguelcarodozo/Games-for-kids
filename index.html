@@ -100,136 +100,6 @@
             pointer-events: none;
         }
 
-        .a {
-            background: #ff9999;
-            color: white;
-        }
-
-        .b {
-            background: #99ff99;
-            color: white;
-        }
-
-        .c {
-            background: #9999ff;
-            color: white;
-        }
-
-        .d {
-            background: #ffd93d;
-            color: white;
-        }
-
-        .e {
-            background: #d1ff04;
-            color: white;
-        }
-
-        .f {
-            background: #99ff99;
-            color: white;
-        }
-
-        .g {
-            background: #c0f04f;
-            color: white;
-        }
-
-        .h {
-            background: #f5d96c;
-            color: white;
-        }
-
-        .i {
-            background: #9e9056;
-            color: white;
-        }
-
-        .j {
-            background: #72ff72;
-            color: white;
-        }
-
-        .k {
-            background: #42ffa1;
-            color: white;
-        }
-
-        .l {
-            background: #fa0808;
-            color: white;
-        }
-
-        .m {
-            background: #ff8c42;
-            color: white;
-        }
-
-        .n {
-            background: #ffb347;
-            color: white;
-        }
-
-        .o {
-            background: #ffd93d;
-            color: white;
-        }
-
-        .p {
-            background: #fcff4e;
-            color: white;
-        }
-
-        .q {
-            background: #f09927;
-            color: white;
-        }
-
-        .r {
-            background: #f83f3c88;
-            color: white;
-        }
-
-        .s {
-            background: #ff6b6b;
-            color: white;
-        }
-
-        .t {
-            background: #ff8c42;
-            color: white;
-        }
-
-        .u {
-            background: #ffb347;
-            color: white;
-        }
-
-        .v {
-            background: #ffd93d;
-            color: white;
-        }
-
-        .w {
-            background: #a0d6b4;
-            color: white;
-        }
-
-        .x {
-            background: #b19cd9;
-            color: white;
-        }
-
-        .y {
-            background: #f7cac9;
-            color: white;
-        }
-
-        .z {
-            background: #9e9056;
-            color: white;
-        }
-
         footer {
             display: flex;
             gap: 20px;
@@ -306,26 +176,142 @@
         /* Responsividade */
         @media (max-width: 600px) {
             h1 {
-                font-size: 2rem;
+                font-size: 3.5rem;
+                /* Títulos maiores */
+                margin-top: 20px;
             }
 
             h3 {
-                font-size: 1.4rem;
+                font-size: 2rem;
+                /* Subtítulos maiores */
+                padding: 0 15px;
             }
 
-            #content {
-                gap: 10px;
+            #main {
+                flex-direction: column;
+                /* Empilha elementos verticalmente */
+                gap: 15px;
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            .content {
+                grid-template-columns: repeat(4, 1fr);
+                /* 4 colunas em vez de 5 */
+                gap: 12px;
                 padding: 15px;
+                max-width: 100%;
+                margin: 10px 0;
             }
 
             button {
-                font-size: 1.5rem;
-                padding: 15px;
+                font-size: 2rem;
+                /* Letras maiores */
+                padding: 18px;
+                /* Botões maiores */
+                min-width: 60px;
+                min-height: 60px;
             }
 
-            #text {
-                font-size: 1.5rem;
-                padding: 10px 20px;
+            #playLetter {
+                width: 80px;
+                /* Botão de som maior */
+                height: 80px;
+                margin: 10px auto;
+            }
+
+            #playLetter img {
+                width: 30px;
+                /* Ícone maior */
+                height: 30px;
+            }
+
+            #startBtn {
+                font-size: 1.8rem;
+                padding: 20px 40px;
+                margin: 20px 0;
+            }
+
+            footer {
+                position: relative;
+                /* Footer NÃO fixado */
+                flex-direction: column;
+                gap: 15px;
+                padding: 25px 15px;
+                margin-top: 30px;
+                font-size: 1.4rem;
+                /* Texto maior */
+                background: #000000;
+                width: 100%;
+            }
+
+            footer a {
+                margin: 5px 0;
+            }
+
+            footer img {
+                width: 30px;
+                /* Ícones maiores */
+                height: 30px;
+            }
+
+            footer p {
+                font-size: 1.4rem;
+                margin-bottom: 10px;
+            }
+
+            /* Ajuste para telas muito pequenas */
+            @media (max-width: 380px) {
+                h1 {
+                    font-size: 2.8rem;
+                }
+
+                h3 {
+                    font-size: 1.6rem;
+                }
+
+                .content {
+                    grid-template-columns: repeat(3, 1fr);
+                    /* 3 colunas para telas muito pequenas */
+                    gap: 8px;
+                }
+
+                button {
+                    font-size: 1.8rem;
+                    padding: 15px;
+                }
+
+                footer {
+                    font-size: 1.2rem;
+                }
+            }
+        }
+
+        /* Ajustes para tablets (600px - 900px) */
+        @media (min-width: 601px) and (max-width: 900px) {
+            h1 {
+                font-size: 4rem;
+            }
+
+            h3 {
+                font-size: 2.2rem;
+            }
+
+            .content {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 15px;
+                max-width: 90%;
+            }
+
+            button {
+                font-size: 2.2rem;
+                padding: 20px;
+            }
+
+            footer {
+                position: relative;
+                padding: 20px;
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -389,26 +375,48 @@
     ];
 
     var group3 = [
-        { name: "l", count: 0 },
+        { name: "o", count: 0 },
         { name: "m", count: 0 },
         { name: "n", count: 0 },
-        { name: "o", count: 0 },
         { name: "p", count: 0 },
-        { name: "q", count: 0 },
-        { name: "r", count: 0 }
+        { name: "l", count: 0 },
+        { name: "r", count: 0 },
+        { name: "q", count: 0 }
     ];
 
     var group4 = [
-        { name: "s", count: 0 },
-        { name: "t", count: 0 },
-        { name: "u", count: 0 },
-        { name: "v", count: 0 },
-        { name: "w", count: 0 },
         { name: "x", count: 0 },
-        { name: "y", count: 0 },
-        { name: "z", count: 0 }
+        { name: "t", count: 0 },
+        { name: "w", count: 0 },
+        { name: "v", count: 0 },
+        { name: "u", count: 0 },
+        { name: "s", count: 0 },
+        { name: "z", count: 0 },
+        { name: "y", count: 0 }
     ];
 
+    var coresHex = [
+        "rgba(255, 87, 51, 1)",
+        "rgba(51, 255, 87, 1)",
+        "rgba(51, 87, 255, 1)",
+        "rgba(243, 51, 255, 1)",
+        "rgba(255, 51, 51, 1)",
+        "rgba(51, 255, 245, 1)",
+        "rgba(245, 255, 51, 1)",
+        "rgba(255, 140, 51, 1)",
+        "rgba(140, 51, 255, 1)",
+        "rgba(255, 51, 156, 1)",
+        "rgba(51, 255, 156, 1)",
+        "rgba(156, 51, 255, 1)",
+        "rgba(255, 215, 51, 1)",
+        "rgba(51, 215, 255, 1)",
+        "rgba(215, 51, 255, 1)",
+        "rgba(255, 87, 51, 1)",
+        "rgba(87, 255, 51, 1)",
+        "rgba(87, 51, 255, 1)",
+        "rgba(255, 51, 215, 1)",
+        "rgba(51, 255, 87, 1)"
+    ]
     function playAuto() {
         new Audio("audio" + letraAtual + ".m4a").play().catch(error => {
             console.log("Áudio não pôde ser reproduzido automaticamente:", error);
@@ -425,17 +433,77 @@
     }
 
     function createGroups(group, fase) {
-        for (let i = 0; i < 20; i++) {
-            let random = Math.floor(Math.random() * group.length);
-            fase.innerHTML += `<button class="${group[random].name}">${group[random].name.toUpperCase()}</button>`;
-            group[random].count++;
+        let coresDisponiveis = [...coresHex];
+        fase.innerHTML = "";
+
+        for (let rodada = 0; rodada < 2; rodada++) {
+            let indices = [];
+            for (let i = 0; i < group.length; i++) {
+                indices.push(i);
+            }
+
+            while (indices.length > 0) {
+                let randomIndexPos = Math.floor(Math.random() * indices.length);
+                let index = indices[randomIndexPos];
+                indices.splice(randomIndexPos, 1);
+
+                let randomColorIndex = Math.floor(Math.random() * coresDisponiveis.length);
+                let randomColor = coresDisponiveis[randomColorIndex];
+                coresDisponiveis.splice(randomColorIndex, 1);
+
+                fase.innerHTML += `<button class="${group[index].name}" style="background-color: ${randomColor}; color: white;">${group[index].name.toUpperCase()}</button>`;
+                group[index].count++;
+            }
+        }
+
+        let remainingButtons = 20 - (group.length * 2);
+
+        for (let i = 0; i < remainingButtons; i++) {
+            if (coresDisponiveis.length === 0) {
+                coresDisponiveis = [...coresHex];
+            }
+
+            let randomIndex = Math.floor(Math.random() * group.length);
+            let randomColorIndex = Math.floor(Math.random() * coresDisponiveis.length);
+            let randomColor = coresDisponiveis[randomColorIndex];
+            coresDisponiveis.splice(randomColorIndex, 1);
+
+            fase.innerHTML += `<button class="${group[randomIndex].name}" style="background-color: ${randomColor}; color: white;">${group[randomIndex].name.toUpperCase()}</button>`;
+            group[randomIndex].count++;
         }
     }
-
     createGroups(group1, fase1);
     createGroups(group2, fase2);
     createGroups(group3, fase3);
     createGroups(group4, fase4);
+
+    //Para facilitar a fase 1
+    var buttonA = document.querySelectorAll(".a");
+    buttonA.forEach(button => {
+        button.style.backgroundColor = "#ff9999";
+    });
+    var buttonB = document.querySelectorAll(".b");
+    buttonB.forEach(button => {
+        button.style.backgroundColor = "#9999ff";
+    });
+    var buttonC = document.querySelectorAll(".c");
+    buttonC.forEach(button => {
+        button.style.backgroundColor = "#99ff99";
+    });
+    var buttonD = document.querySelectorAll(".d");
+    buttonD.forEach(button => {
+        button.style.backgroundColor = "#ffd93d";
+    });
+
+    var buttons = document.querySelectorAll("button");
+    function disableButtonsTemporarily() {
+        buttons.forEach(button => {
+            button.classList.add("desabilitado");
+            setTimeout(() => {
+                button.classList.remove("desabilitado");
+            }, 2500);
+        })
+    }
 
     var groups = [group1, group2, group3, group4];
     var quants = [];
@@ -463,19 +531,19 @@
                         letraAtual = letters[index + 1];
                         playWithDelay();
                         disableButtonsTemporarily();
-                        if (letraAtual == "f") {
+                        if (letraAtual == group2[0].name) {
                             fase1.classList.remove("content");
                             fase1.classList.add("hidden");
                             fase2.classList.remove("hidden");
                             fase2.classList.add("content");
                             goal.textContent = "Ótimo! Agora encontre as próximas letras!";
-                        }else if (letraAtual == "l") {
+                        } else if (letraAtual == group3[0].name) {
                             fase2.classList.remove("content");
                             fase2.classList.add("hidden");
                             fase3.classList.remove("hidden");
                             fase3.classList.add("content");
                             goal.textContent = "Muito bem! Agora encontre as próximas letras!";
-                        } else if (letraAtual == "s") {
+                        } else if (letraAtual == group4[0].name) {
                             fase3.classList.remove("content");
                             fase3.classList.add("hidden");
                             fase4.classList.remove("hidden");
@@ -486,10 +554,9 @@
                             fase4.classList.add("hidden");
                             playLetter.classList.add("hidden");
                             goal.textContent = "Parabéns! Você encontrou todas as letras!";
-                        }   else{
+                        } else {
                             goal.textContent = "Próxima letra!";
                         }
-
                     }
                 } else {
                     goal.textContent = "Escute o som novamente!";
@@ -499,16 +566,6 @@
 
         })
     })
-
-    var buttons = document.querySelectorAll("button");
-    function disableButtonsTemporarily() {
-        buttons.forEach(button => {
-            button.classList.add("desabilitado");
-            setTimeout(() => {
-                button.classList.remove("desabilitado");
-            }, 2000);
-        })
-    }
 
     playLetter.onclick = function () {
         playAuto();
