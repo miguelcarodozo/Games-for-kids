@@ -173,23 +173,19 @@
             }
         }
 
-        /* Responsividade */
         @media (max-width: 600px) {
             h1 {
                 font-size: 3.5rem;
-                /* Títulos maiores */
                 margin-top: 20px;
             }
 
             h3 {
                 font-size: 2rem;
-                /* Subtítulos maiores */
                 padding: 0 15px;
             }
 
             #main {
                 flex-direction: column;
-                /* Empilha elementos verticalmente */
                 gap: 15px;
                 width: 100%;
                 padding: 0 10px;
@@ -197,7 +193,6 @@
 
             .content {
                 grid-template-columns: repeat(4, 1fr);
-                /* 4 colunas em vez de 5 */
                 gap: 12px;
                 padding: 15px;
                 max-width: 100%;
@@ -206,23 +201,19 @@
 
             button {
                 font-size: 2rem;
-                /* Letras maiores */
                 padding: 18px;
-                /* Botões maiores */
                 min-width: 60px;
                 min-height: 60px;
             }
 
             #playLetter {
                 width: 80px;
-                /* Botão de som maior */
                 height: 80px;
                 margin: 10px auto;
             }
 
             #playLetter img {
                 width: 30px;
-                /* Ícone maior */
                 height: 30px;
             }
 
@@ -234,13 +225,11 @@
 
             footer {
                 position: relative;
-                /* Footer NÃO fixado */
                 flex-direction: column;
                 gap: 15px;
                 padding: 25px 15px;
                 margin-top: 30px;
                 font-size: 1.4rem;
-                /* Texto maior */
                 background: #000000;
                 width: 100%;
             }
@@ -251,7 +240,6 @@
 
             footer img {
                 width: 30px;
-                /* Ícones maiores */
                 height: 30px;
             }
 
@@ -260,7 +248,6 @@
                 margin-bottom: 10px;
             }
 
-            /* Ajuste para telas muito pequenas */
             @media (max-width: 380px) {
                 h1 {
                     font-size: 2.8rem;
@@ -272,7 +259,6 @@
 
                 .content {
                     grid-template-columns: repeat(3, 1fr);
-                    /* 3 colunas para telas muito pequenas */
                     gap: 8px;
                 }
 
@@ -287,7 +273,6 @@
             }
         }
 
-        /* Ajustes para tablets (600px - 900px) */
         @media (min-width: 601px) and (max-width: 900px) {
             h1 {
                 font-size: 4rem;
@@ -312,6 +297,90 @@
                 position: relative;
                 padding: 20px;
                 font-size: 1.3rem;
+            }
+        }
+
+        @media (orientation: portrait) {
+            h1 {
+                font-size: 3.8rem;
+                /* Ainda maior para retrato */
+                margin: 15px 0;
+                line-height: 1.2;
+            }
+
+            h3 {
+                font-size: 2.2rem;
+                padding: 0 15px;
+                line-height: 1.4;
+            }
+
+            #main {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+                padding: 0 10px;
+            }
+
+            .content {
+                grid-template-columns: repeat(3, 1fr) !important;
+                /* FORÇA 3 colunas em retrato */
+                gap: 12px;
+                padding: 15px;
+                width: 95%;
+                max-width: 95%;
+                margin: 10px auto;
+            }
+
+            button {
+                font-size: 2.5rem !important;
+                /* Letras MUITO maiores */
+                padding: 25px !important;
+                min-width: 80px;
+                min-height: 80px;
+                aspect-ratio: 1;
+            }
+
+            #playLetter {
+                width: 100px;
+                height: 100px;
+                margin: 20px auto;
+            }
+
+            #playLetter img {
+                width: 40px;
+                height: 40px;
+            }
+
+            #startBtn {
+                font-size: 2.2rem;
+                padding: 25px 50px;
+                margin: 30px 0;
+                width: 80%;
+                max-width: 400px;
+            }
+
+            footer {
+                position: relative;
+                flex-direction: column;
+                gap: 20px;
+                padding: 30px 15px;
+                margin-top: 40px;
+                font-size: 1.8rem;
+                width: 100%;
+            }
+
+            footer a {
+                margin: 8px 0;
+            }
+
+            footer img {
+                width: 35px;
+                height: 35px;
+            }
+
+            footer p {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
             }
         }
     </style>
