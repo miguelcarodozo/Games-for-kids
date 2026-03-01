@@ -301,87 +301,92 @@
         }
 
         @media (orientation: portrait) {
+            body {
+                justify-content: flex-start;
+                padding: 15px 15px 0 15px;
+            }
+
             h1 {
-                font-size: 6rem;
-                margin: 10px 0;
-                line-height: 1.2;
+                font-size: 3.2rem;
+                margin: 5px 0;
             }
 
             h3 {
-                font-size: 3rem;
-                padding: 0 15px;
-                line-height: 1.4;
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+                padding: 0 10px;
             }
 
             #main {
                 flex-direction: column;
                 gap: 15px;
                 width: 100%;
-                padding: 0 10px;
+                margin: 0 auto;
             }
 
             .content {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 12px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
                 padding: 15px;
-                width: 95%;
-                max-width: 95%;
-                margin: 10px auto;
+                width: 100%;
+                max-width: 100%;
+                margin: 5px auto;
             }
 
             button {
-                font-size: 4rem !important;
-                padding: 3px !important;
-                min-width: 80px;
-                min-height: 80px;
+                font-size: 1.8rem !important;
+                padding: 12px !important;
+                min-width: 50px;
+                min-height: 50px;
                 aspect-ratio: 1;
             }
 
             button img {
-                width: 60px;
-                height: 60px;
+                width: 20px !important;
+                height: 20px !important;
             }
 
             #playLetter {
-                width: 150px;
-                height: 150px;
-                margin: 20px auto;
-                background-color: white;
+                width: 65px;
+                height: 65px;
+                margin: 10px auto;
             }
 
             #playLetter img {
-                width: 40px;
-                height: 40px;
+                width: 25px;
+                height: 25px;
             }
 
             #startBtn {
-                font-size: 2.2rem;
-                padding: 25px 50px;
-                margin: 30px 0;
-                width: 80%;
-                max-width: 400px;
+                font-size: 1.6rem;
+                padding: 12px 25px;
+                margin: 15px 0;
+                width: auto;
             }
 
             footer {
+                position: relative;
                 flex-direction: column;
-                gap: 20px;
-                padding: 30px 15px;
-                font-size: 4rem;
+                gap: 10px;
+                padding: 20px 15px;
+                margin-top: 25px;
+                font-size: 1.2rem;
                 width: 100%;
+                background: #000000;
             }
 
             footer a {
-                margin: 8px 0;
+                margin: 3px 0;
             }
 
             footer img {
-                width: 100px;
-                height: 100px;
+                width: 22px;
+                height: 22px;
             }
 
             footer p {
-                font-size: 1rem;
-                margin-bottom: 15px;
+                font-size: 1.2rem;
+                margin-bottom: 8px;
             }
         }
     </style>
