@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>Letras</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         * {
             margin: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #667eea;
             min-height: 100vh;
             display: flex;
@@ -36,68 +37,17 @@
             animation: fadeInDown 0.8s ease 0.1s both;
         }
 
-        #main {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: center;
-            gap: 30px;
-            width: 100%;
-            margin: 1rem auto;
-        }
-
-        .content {
+        #games{
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
-            max-width: 600px;
-            padding: 20px;
-            background: rgb(94, 41, 119);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            animation: fadeInUp 0.8s ease;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
-        button {
-            padding: 14px;
-            font-size: 2rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            aspect-ratio: 1;
-            display: flex;
+        a {
+            text-decoration: none;
+            text-align: center;
             align-items: center;
             justify-content: center;
-
-        }
-
-        button:hover {
-            transform: scale(1.05) translateY(-5px);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        button:active {
-            transform: scale(0.95);
-        }
-
-        button:disabled {
-            opacity: 0.8;
-            cursor: default;
-            background: white !important;
-            color: black;
-        }
-
-        button:disabled:hover {
-            transform: scale(0.95);
-        }
-
-        .desabilitado {
-            pointer-events: none;
         }
 
         footer {
@@ -115,13 +65,21 @@
             font-weight: bolder;
         }
 
-        #playLetter {
-            width: 70px;
-            height: 70px;
-            background-color: white;
-            padding: 0;
+        .game {
+            background: #ffffff;
+            padding: 20px 10px;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
+        .gameLink {
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: bold;
+            justify-content: center;
+        }
 
         @keyframes fadeInDown {
             from {
@@ -172,240 +130,16 @@
                 text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 2px 2px 0 rgba(0, 0, 0, 0.3);
             }
         }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 3.5rem;
-                margin-top: 20px;
-            }
-
-            h3 {
-                font-size: 2rem;
-                padding: 0 15px;
-            }
-
-            #main {
-                flex-direction: column;
-                gap: 15px;
-                width: 100%;
-                padding: 0 10px;
-            }
-
-            .content {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 12px;
-                padding: 15px;
-                max-width: 100%;
-                margin: 10px 0;
-            }
-
-            button {
-                font-size: 2rem;
-                padding: 18px;
-                min-width: 60px;
-                min-height: 60px;
-            }
-
-            #playLetter {
-                width: 80px;
-                height: 80px;
-                margin: 10px auto;
-            }
-
-            #playLetter img {
-                width: 30px;
-                height: 30px;
-            }
-
-            #startBtn {
-                font-size: 1.8rem;
-                padding: 20px 40px;
-                margin: 20px 0;
-            }
-
-            footer {
-                position: relative;
-                flex-direction: column;
-                gap: 15px;
-                padding: 25px 15px;
-                margin-top: 30px;
-                font-size: 1.4rem;
-                background: #000000;
-                width: 100%;
-            }
-
-            footer a {
-                margin: 5px 0;
-            }
-
-            footer img {
-                width: 30px;
-                height: 30px;
-            }
-
-            footer p {
-                font-size: 1.4rem;
-                margin-bottom: 10px;
-            }
-
-            @media (max-width: 380px) {
-                h1 {
-                    font-size: 2.8rem;
-                }
-
-                h3 {
-                    font-size: 1.6rem;
-                }
-
-                .content {
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 8px;
-                }
-
-                button {
-                    font-size: 1.8rem;
-                    padding: 15px;
-                }
-
-                footer {
-                    font-size: 1.2rem;
-                }
-            }
-        }
-
-        @media (min-width: 601px) and (max-width: 900px) {
-            h1 {
-                font-size: 4rem;
-            }
-
-            h3 {
-                font-size: 2.2rem;
-            }
-
-            .content {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 15px;
-                max-width: 90%;
-            }
-
-            button {
-                font-size: 2.2rem;
-                padding: 20px;
-            }
-
-            footer {
-                position: relative;
-                padding: 20px;
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (orientation: portrait) {
-
-            body{
-                overflow-y: hidden;
-            }
-
-            h1 {
-                margin: 0;
-                font-size: 6rem;
-            }
-
-            h3 {
-                font-size: 3rem;
-            }
-
-            #main {
-                flex-direction: column;
-                padding: 20px 10px;
-                gap: 15px;
-                width: 70%;
-                margin: 0 auto;
-            }
-
-            .content {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 10px;
-                padding: 15px;
-                width: 100%;
-                max-width: 100%;
-                margin: 5px auto;
-            }
-
-            button {
-                font-size: 2rem;
-                padding: 0;
-                min-width: 50px;
-                min-height: 50px;
-                aspect-ratio: 1;
-            }
-
-            button img {
-                width: 80px !important;
-                height: 80px !important;
-            }
-
-            #playLetter {
-                width: 120px;
-                height: 120px;
-                margin: 10px auto;
-            }
-
-            #playLetter img {
-                width: 80px;
-                height: 80px;
-            }
-
-            #startBtn {
-                font-size: 3rem;
-                padding: 12px 25px;
-                margin: 15px 0;
-                width: auto;
-            }
-
-            footer {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                flex-direction: column;
-                gap: 10px;
-                padding: 20px 15px;
-                margin-top: 25px;
-                font-size: 3rem;
-                width: 100%;
-                background: #000000;
-            }
-
-            footer a {
-                margin: 3px 0;
-            }
-
-            footer img {
-                width: 50px;
-                height: 50px;
-            }
-        }
     </style>
+    <title>Games-for-Kids</title>
 </head>
 
 <body>
-    <h1>Aprendendo as letras</h1>
-    <h3 id="goal">Aperte o botão para começar!</h3>
-    <div id="main">
-        <button id="startBtn">Começar</button>
-        <div id="fase1" class="hidden">
-        </div>
-        <div id="fase2" class="hidden">
-        </div>
-        <div id="fase3" class="hidden">
-        </div>
-        <div id="fase4" class="hidden">
-        </div>
-        <button id="playLetter" type="click" class="hidden diff">
-            <img width="20" height="20" src="https://img.icons8.com/ios/50/high-volume--v1.png" alt="high-volume--v1" />
-        </button>
-    </div>
+    <h1>Bem-vindo à Games-for-Kids!</h1>
+    <h3>Escolha um jogo para jogar:</h3>
+    <div id="games">
 
+    </div>
 </body>
 <footer>
     <p>@ Miguel Cardozo - 2026</p>
@@ -417,241 +151,23 @@
     </a>
 </footer>
 <script>
-    var fase1 = document.getElementById("fase1");
-    var fase2 = document.getElementById("fase2");
-    var fase3 = document.getElementById("fase3");
-    var fase4 = document.getElementById("fase4");
-
-    var goal = document.getElementById("goal");
-    var playLetter = document.getElementById("playLetter");
-    var letraAtual = "A";
-
-    const startBtn = document.getElementById("startBtn");
-
-    var group1 = [
-        { name: "a", count: 0 },
-        { name: "b", count: 0 },
-        { name: "c", count: 0 },
-        { name: "d", count: 0 }
+    const gameDiv = document.getElementById("games");
+    const games = [
+        { name: "Learn the Letters", url: "letras.html" },
+        { name: "Associe", url: "association.html" },
+        { name: "Jogo da memória", url: "memory.html" }, 
+        { name: "Matemática", url: "mat.html" }
     ];
 
-    var group2 = [
-        { name: "f", count: 0 },
-        { name: "h", count: 0 },
-        { name: "e", count: 0 },
-        { name: "g", count: 0 },
-        { name: "i", count: 0 },
-        { name: "k", count: 0 },
-        { name: "j", count: 0 }
-    ];
 
-    var group3 = [
-        { name: "o", count: 0 },
-        { name: "m", count: 0 },
-        { name: "n", count: 0 },
-        { name: "p", count: 0 },
-        { name: "l", count: 0 },
-        { name: "r", count: 0 },
-        { name: "q", count: 0 }
-    ];
-
-    var group4 = [
-        { name: "x", count: 0 },
-        { name: "t", count: 0 },
-        { name: "w", count: 0 },
-        { name: "v", count: 0 },
-        { name: "u", count: 0 },
-        { name: "s", count: 0 },
-        { name: "z", count: 0 },
-        { name: "y", count: 0 }
-    ];
-
-    var coresHex = [
-        "rgba(255, 87, 51, 1)",
-        "rgba(51, 255, 87, 1)",
-        "rgba(51, 87, 255, 1)",
-        "rgba(243, 51, 255, 1)",
-        "rgba(255, 51, 51, 1)",
-        "rgba(51, 255, 245, 1)",
-        "rgba(245, 255, 51, 1)",
-        "rgba(255, 140, 51, 1)",
-        "rgba(140, 51, 255, 1)",
-        "rgba(255, 51, 156, 1)",
-        "rgba(51, 255, 156, 1)",
-        "rgba(156, 51, 255, 1)",
-        "rgba(255, 215, 51, 1)",
-        "rgba(51, 215, 255, 1)",
-        "rgba(215, 51, 255, 1)",
-        "rgba(255, 87, 51, 1)",
-        "rgba(87, 255, 51, 1)",
-        "rgba(87, 51, 255, 1)",
-        "rgba(255, 51, 215, 1)",
-        "rgba(51, 255, 87, 1)"
-    ]
-    function playAuto() {
-        new Audio("audio" + letraAtual + ".m4a").play().catch(error => {
-            console.log("Áudio não pôde ser reproduzido automaticamente:", error);
-            goal.textContent = "Clique no botão de som para ouvir";
-        });
-    }
-
-    function playWithDelay() {
-        setTimeout(() => {
-            var audio = new Audio("audio" + letraAtual + ".m4a");
-            audio.load();
-            audio.play().catch(e => console.log("Erro ao reproduzir:", e));
-        }, 2000);
-    }
-
-    function createGroups(group, fase) {
-        let coresDisponiveis = [...coresHex];
-        fase.innerHTML = "";
-
-        for (let rodada = 0; rodada < 2; rodada++) {
-            let indices = [];
-            for (let i = 0; i < group.length; i++) {
-                indices.push(i);
-            }
-
-            while (indices.length > 0) {
-                let randomIndexPos = Math.floor(Math.random() * indices.length);
-                let index = indices[randomIndexPos];
-                indices.splice(randomIndexPos, 1);
-
-                let randomColorIndex = Math.floor(Math.random() * coresDisponiveis.length);
-                let randomColor = coresDisponiveis[randomColorIndex];
-                coresDisponiveis.splice(randomColorIndex, 1);
-
-                fase.innerHTML += `<button class="${group[index].name}" style="background-color: ${randomColor}; color: white;">${group[index].name.toUpperCase()}</button>`;
-                group[index].count++;
-            }
-        }
-
-        let remainingButtons = 20 - (group.length * 2);
-
-        for (let i = 0; i < remainingButtons; i++) {
-            if (coresDisponiveis.length === 0) {
-                coresDisponiveis = [...coresHex];
-            }
-
-            let randomIndex = Math.floor(Math.random() * group.length);
-            let randomColorIndex = Math.floor(Math.random() * coresDisponiveis.length);
-            let randomColor = coresDisponiveis[randomColorIndex];
-            coresDisponiveis.splice(randomColorIndex, 1);
-
-            fase.innerHTML += `<button class="${group[randomIndex].name}" style="background-color: ${randomColor}; color: white;">${group[randomIndex].name.toUpperCase()}</button>`;
-            group[randomIndex].count++;
-        }
-    }
-    createGroups(group1, fase1);
-    createGroups(group2, fase2);
-    createGroups(group3, fase3);
-    createGroups(group4, fase4);
-
-    //Para facilitar a fase 1
-    var buttonA = document.querySelectorAll(".a");
-    buttonA.forEach(button => {
-        button.style.backgroundColor = "#ff9999";
-    });
-    var buttonB = document.querySelectorAll(".b");
-    buttonB.forEach(button => {
-        button.style.backgroundColor = "#9999ff";
-    });
-    var buttonC = document.querySelectorAll(".c");
-    buttonC.forEach(button => {
-        button.style.backgroundColor = "#99ff99";
-    });
-    var buttonD = document.querySelectorAll(".d");
-    buttonD.forEach(button => {
-        button.style.backgroundColor = "#ffd93d";
-    });
-
-    var buttons = document.querySelectorAll("button");
-    function disableButtonsTemporarily() {
-        buttons.forEach(button => {
-            button.classList.add("desabilitado");
-            setTimeout(() => {
-                button.classList.remove("desabilitado");
-            }, 2500);
-        })
-    }
-
-    var groups = [group1, group2, group3, group4];
-    var quants = [];
-    var letters = [];
-
-    groups.forEach(group => {
-        group.forEach(letter => {
-            quants.push(letter.count);
-            letters.push(letter.name);
-        })
+    games.forEach((game) => {
+        gameDiv.innerHTML += `
+        <div class="game">
+            <a href="./games/${game.url}" class="gameLink">${game.name}</a>
+        </div>
+                `
     })
 
-    letters.forEach((letter, index) => {
-        var buttons = document.querySelectorAll("." + letter);
-        buttons.forEach((button) => {
-            button.addEventListener('click', function () {
-                if (index == 0 || quants[index - 1] == 0) {
-                    new Audio("correto.m4a").play().catch(e => console.log("Erro ao reproduzir:", e));
-                    button.disabled = true;
-                    button.textContent = "";
-                    button.innerHTML = `<img width="15px" height="15px" src="https://img.icons8.com/?size=100&id=3061&format=png&color=000000" alt="checked--v1"/>`;
-                    quants[index]--;
-                    goal.textContent = "Continue!";
-                    if (quants[index] == 0) {
-                        letraAtual = letters[index + 1];
-                        playWithDelay();
-                        disableButtonsTemporarily();
-                        if (letraAtual == group2[0].name) {
-                            fase1.classList.remove("content");
-                            fase1.classList.add("hidden");
-                            fase2.classList.remove("hidden");
-                            fase2.classList.add("content");
-                            goal.textContent = "Ótimo! Agora encontre as próximas letras!";
-                        } else if (letraAtual == group3[0].name) {
-                            fase2.classList.remove("content");
-                            fase2.classList.add("hidden");
-                            fase3.classList.remove("hidden");
-                            fase3.classList.add("content");
-                            goal.textContent = "Muito bem! Agora encontre as próximas letras!";
-                        } else if (letraAtual == group4[0].name) {
-                            fase3.classList.remove("content");
-                            fase3.classList.add("hidden");
-                            fase4.classList.remove("hidden");
-                            fase4.classList.add("content");
-                            goal.textContent = "Excelente! Agora encontre as últimas letras!";
-                        } else if (index == letters.length - 1) {
-                            fase4.classList.remove("content");
-                            fase4.classList.add("hidden");
-                            playLetter.classList.add("hidden");
-                            goal.textContent = "Parabéns! Você encontrou todas as letras!";
-                        } else {
-                            goal.textContent = "Próxima letra!";
-                        }
-                    }
-                } else {
-                    goal.textContent = "Escute o som novamente!";
-                    new Audio("errado.m4a").play().catch(e => console.log("Erro ao reproduzir:", e));
-                }
-            })
-
-        })
-    })
-
-    playLetter.onclick = function () {
-        playAuto();
-        disableButtonsTemporarily();
-    }
-
-    startBtn.onclick = function () {
-        startBtn.style.display = "none";
-        fase1.classList.remove("hidden");
-        fase1.classList.add("content");
-        playLetter.classList.remove("hidden");
-        goal.textContent = "Ache todas as letras que fazem esse som!";
-        playWithDelay();
-        disableButtonsTemporarily();
-    }
 
 </script>
 

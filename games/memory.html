@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #667eea;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            text-align: center;
+            color: #ffd93d;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease 0.1s both;
+        }
+
+        #content {
+            display: none;
+            grid-template-columns: repeat(4, 1fr);
+            min-width: 400px;
+            min-height: 100px;
+            gap: 15px;
+            padding: 15px;
+            background: rgb(94, 41, 119);
+            border-radius: 30px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            background-color: #fff;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            border: 2px solid black;
+        }
+
+        #content img {
+            width: 80px;
+            height: 80px;
+        }
+
+        .unflipped img {
+            display: none;
+        }
+
+        .unflipped p {
+            font-size: 5rem;
+            text-align: center;
+        }
+
+        .flipped {
+            pointer-events: none;
+        }
+
+        .flipped img {
+            display: block;
+        }
+
+        .flipped p {
+            display: none;
+        }
+
+        .hit img {
+            display: block;
+        }
+
+        .hit p {
+            display: none;
+        }
+
+        footer {
+            display: flex;
+            gap: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #000000;
+            color: white;
+            text-align: center;
+            justify-content: end;
+            padding: 15px;
+            font-weight: bolder;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Memory Game</h1>
+    <h3 id="feedback">Aperte o botão pra começar</h3>
+    <button id="startButton">Começar</button>
+    <div id="content"></div>
+
+    </div>
+</body>
+<footer>
+    <p>@ Miguel Cardozo - 2026</p>
+    <a href="https://www.linkedin.com/in/miguelcardozo-">
+        <img src="https://img.icons8.com/?size=100&id=102748&format=png&color=FFFFFF" width="20px">
+    </a>
+    <a href="https://github.com/miguelcarodozo">
+        <img src="https://img.icons8.com/?size=100&id=12599&format=png&color=FFFFFF" width="20px">
+    </a>
+</footer>
+<script>
+    const feedback = document.getElementById('feedback');
+    const content = document.getElementById('content');
+    const startButton = document.getElementById('startButton');
+
+    const cards = [
+        ["./siteImages/memoria/raio.png",
+        "./siteImages/memoria/urso.png"],
+        ["./siteImages/memoria/pen.png",
+        "./siteImages/memoria/heart.gif"]
+        ,
+        ["./siteImages/memoria/cloud.png",
+        "./siteImages/memoria/bola.png"]
+    ];
+
+    let cardsToAdd;
+
+    let i = 0;
+    let touches = 0;
+
+    function checkResult() {
+        const flipped = document.querySelectorAll(".flipped");
+        let sources = [];
+        flipped.forEach((card) => {
+            const img = card.querySelector(".cardImg");
+            if (!sources.includes(img.src)) {
+                sources.push(img.src);
+            }
+        });
+
+        touches = 0;
+        if (sources.length == 1) {
+            flipped.forEach((card) => {
+                card.classList.remove("flipped");
+                card.classList.add("hit");
+                const totalCards = cardsToAdd.length * 2;
+                const hitCards = document.querySelectorAll(".hit").length;
+                if (hitCards == totalCards) {
+                    i++;
+                    build();
+                }
+            })
+        } else {
+            flipped.forEach((card) => {
+                setTimeout(() => {
+                card.classList.remove("flipped");
+                }, 1000);
+                card.classList.add("unflipped");
+            });
+        }
+    }
+
+    function createCards() {
+        let newCards = [...cardsToAdd];
+        newCards.push(...cardsToAdd);
+        for (let k = 0; k < cardsToAdd.length * 2; k++) {
+            let random = Math.floor(Math.random() * newCards.length);
+            let card = newCards[random];
+            newCards.splice(random, 1);
+            content.innerHTML += `
+                    <div class="unflipped card">
+                        <img src="${card}" alt="card" class="cardImg">
+                        <p>?</p>
+                    </div>`;
+        }
+    }
+
+    function build() {
+        if (i <= cards.length - 1) {
+            let j = i;
+            cardsToAdd = [];
+            content.innerHTML = "";
+
+            while (j >= 0) {
+                cards[j].forEach((card) => {
+                    cardsToAdd.push(card);
+                })
+                j--;
+            }
+
+            createCards();
+
+            const cardElements = document.querySelectorAll(".unflipped");
+
+            cardElements.forEach(card => {
+                card.addEventListener("click", () => {
+                    if (card.classList.contains("hit")) {
+                        return;
+                    }
+                    touches++;
+                    card.classList.remove("unflipped");
+                    card.classList.add("flipped");
+                    if (touches == 2) {
+                        checkResult();
+                    }
+                });
+            });
+
+        }
+    }
+
+    startButton.onclick = function () {
+        startButton.style.display = "none";
+        content.style.display = "grid";
+        build();
+    }
+
+
+</script>
+
+</html>

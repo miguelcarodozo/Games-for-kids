@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da associação</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: #667eea;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 20px 80px 20px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 10px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        h3 {
+            font-size: 1.8rem;
+            text-align: center;
+            color: #ffd93d;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.8s ease 0.1s both;
+        }
+
+        #content {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            width: auto;
+            padding: 20px;
+            background: rgba(94, 41, 119, 0.6);
+            border-radius: 30px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        #startButton {
+            padding: 14px;
+            font-weight: bold;
+            font-size: 2rem;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+        #startButton:hover {
+            transform: scale(1.05) translateY(-5px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #startButton:active {
+            transform: scale(0.95);
+        }
+
+        #startButton:disabled {
+            opacity: 0.8;
+            cursor: default;
+            background: white !important;
+            color: black;
+        }
+
+        .option-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        #imgDiv {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gameImg {
+            width: 500px;
+            height: auto;
+            border: solid;
+            border-radius: 15px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        #optionsDiv {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .option-btn {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: solid 2px black;
+            font-size: 1.2rem;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        footer {
+            display: flex;
+            gap: 20px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #000000;
+            color: white;
+            text-align: center;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 15px 30px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+        footer a {
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        footer a:hover {
+            transform: scale(1.1);
+        }
+
+        footer img {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Animações */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsividade para tablets */
+        @media (max-width: 900px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            #main {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .content {
+                grid-template-columns: repeat(4, 1fr);
+                max-width: 100%;
+            }
+
+            button {
+                font-size: 1.8rem;
+                padding: 12px;
+            }
+        }
+
+        /* Responsividade para celular */
+        @media (max-width: 600px) {
+            body {
+                padding: 15px 15px 100px 15px;
+                justify-content: flex-start;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                margin-top: 10px;
+            }
+
+            h3 {
+                font-size: 1.3rem;
+                padding: 0 10px;
+            }
+
+            #main {
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                padding: 12px;
+            }
+
+            button {
+                font-size: 1.5rem;
+                padding: 10px;
+                min-width: 45px;
+                min-height: 45px;
+            }
+
+            #startBtn {
+                font-size: 1.4rem;
+                padding: 12px 25px;
+                min-width: 180px;
+            }
+
+            #playLetter {
+                width: 60px;
+                height: 60px;
+            }
+
+            #playLetter img {
+                width: 25px;
+                height: 25px;
+            }
+
+            footer {
+                padding: 12px 15px;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+
+            footer img {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* Modo retrato para celulares */
+        @media (orientation: portrait) and (max-width: 600px) {
+            body {
+                overflow-y: auto;
+                padding-bottom: 120px;
+            }
+
+            h1 {
+                font-size: 2.8rem;
+                margin: 5px 0;
+            }
+
+            h3 {
+                font-size: 1.4rem;
+            }
+
+            .content {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 8px;
+                padding: 10px;
+            }
+
+            button {
+                font-size: 1.3rem;
+                padding: 8px;
+                min-width: 40px;
+                min-height: 40px;
+            }
+
+            button img {
+                width: 20px !important;
+                height: 20px !important;
+            }
+
+            #playLetter {
+                width: 55px;
+                height: 55px;
+            }
+
+            #playLetter img {
+                width: 22px;
+                height: 22px;
+            }
+
+            #startBtn {
+                font-size: 1.2rem;
+                padding: 10px 20px;
+                min-width: 160px;
+            }
+
+            footer {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+                padding: 10px 15px;
+                font-size: 1rem;
+            }
+
+            footer p {
+                width: 100%;
+                text-align: center;
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+
+            footer img {
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* Telas muito pequenas */
+        @media (max-width: 380px) {
+            .content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            button {
+                font-size: 1.2rem;
+                padding: 8px;
+            }
+        }
+
+        /* Tablets em retrato */
+        @media (min-width: 601px) and (max-width: 900px) and (orientation: portrait) {
+            .content {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            button {
+                font-size: 2rem;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Jogo da associação</h1>
+    <h3 id="text">Aperte o botão pra começar!</h3>
+    <button id="startButton">Começar</button>
+    <div id="content" style="display: none;">
+        <div id="imgDiv">
+            <img src="" id="gameImg" width="100px">
+        </div>
+        <div id="optionsDiv">
+        </div>
+    </div>
+</body>
+<footer>
+    <p>@ Miguel Cardozo - 2026</p>
+    <a href="https://www.linkedin.com/in/miguelcardozo-">
+        <img src="https://img.icons8.com/?size=100&id=102748&format=png&color=FFFFFF" width="20px">
+    </a>
+    <a href="https://github.com/miguelcarodozo">
+        <img src="https://img.icons8.com/?size=100&id=12599&format=png&color=FFFFFF" width="20px">
+    </a>
+</footer>
+<script>
+    const startBtn = document.getElementById("startButton");
+    const contentDiv = document.getElementById("content");
+    const ImgDiv = document.getElementById("imgDiv");
+    const gameImg = document.getElementById("gameImg");
+    const optionsDiv = document.getElementById("optionsDiv");
+    const feedback = document.getElementById("text");
+
+    const questions = [
+        {
+            imgUrl: "https://escolaweb.com.br/wp-content/uploads/2024/03/sua-escola-e-uma-empresa-1536x963.jpg",
+            options: ["Lápis", "Pedra", "Professora", "Sofá", "Faca", "Cadeira", "Mesa", "Poste", "Apagador", "Caderno", "Mochila", "Ventilador", "Relógio", "Computador"],
+            answers: ["Lápis", "Professora", "Cadeira", "Mesa", "Apagador", "Caderno", "Mochila"]
+        },
+        {
+            imgUrl: "https://img.freepik.com/vetores-gratis/pessoas-caminhando-e-sentadas-no-predio-do-hospital-exterior-em-vidro-da-clinica-da-cidade-ilustracao-em-vetor-plana-para-ajuda-medica-emergencia-arquitetura-conceito-de-saude_74855-10130.jpg?semt=ais_hybrid&w=740&q=80",
+            options: ["Bandeira", "Remédios", "Cachorro", "Régua", "Televisão", "Médico", "Pacientes", "Estetoscópio", "Ambulância", "Seringa", "Luva", "Máscara", "Raio-X"],
+            answers: ["Remédios", "Médico", "Pacientes", "Estetoscópio", "Ambulância", "Seringa"]
+        },
+        {
+            imgUrl: "https://img3.stockfresh.com/files/r/rastudio/m/32/2276020_stock-photo-supermarket-cartoon.jpg",
+            options: ["Carrinho", "Geladeira", "Cama", "Computador", "Fruta", "Prateleira", "Martelo", "Leite", "Pão", "Caixa", "Carne", "Vassoura"],
+            answers: ["Carrinho", "Fruta", "Prateleira", "Leite", "Pão", "Caixa", "Carne"]
+        },
+        {
+            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeDiv7eYI0PfVkXCv-SzLOPaPv0Veiqi9tiQ&s",
+            options: ["Areia", "Computador", "Bola", "Óculos de Sol", "Microondas", "Cadeira de Praia", "Chapéu", "Liquidificador", "Protetor Solar", "Corda", "Guarda-sol"],
+            answers: ["Areia", "Bola", "Óculos de Sol", "Cadeira de Praia", "Chapéu", "Protetor Solar", "Guarda-sol"]
+        },
+        {
+            imgUrl: "https://img.freepik.com/vetores-gratis/desenho-restaurante-bela_23-2147567264.jpg?semt=ais_hybrid&w=740&q=80",
+            options: ["Cardápio", "Cama", "Garfo", "Faca", "Guarda-chuva", "Cadeira", "Prato", "Computador", "Copo", "Panela", "Batedeira", "Garçom"],
+            answers: ["Cardápio", "Garfo", "Faca", "Cadeira", "Prato", "Copo", "Garçom", "Panela"]
+        },
+        {
+            imgUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8NCPZcn--3QOR-dqlATcazrCylXO2Yvq7Cg&s",
+            options: ["Carro", "Martelo", "Computador", "Chave Inglesa", "Macaco", "Óleo", "Pneu", "Cama", "Sofá", "Ferramentas", "Parafuso", "Liquidificador"],
+            answers: ["Carro", "Martelo", "Chave Inglesa", "Macaco", "Óleo", "Pneu", "Ferramentas", "Parafuso"]
+        }
+    ]
+
+    startBtn.onclick = function () {
+        startBtn.style.display = "none";
+        content.style.display = "flex";
+        feedback.textContent = "Vamos lá!";
+        loadQuestion();
+    }
+
+    var i = 0;
+
+    function disableButtons() {
+        const buttons = document.querySelectorAll(".option-btn");
+        buttons.forEach((btn) => {
+            btn.style.pointerEvents = "none";
+            setTimeout(() => {
+                btn.style.pointerEvents = "auto";
+            }, 1000);
+        })
+    }
+
+    function checkResult(answers) {
+        const buttons = document.querySelectorAll(".option-btn");
+
+        var allDone = true;
+        buttons.forEach((btn) => {
+            if (answers.includes(btn.textContent) && btn.disabled == false) {
+                allDone = false;
+            }
+        });
+
+        if (allDone == true) {
+            disableButtons();
+            feedback.textContent = "Vamos pro próximo!";
+            i++;
+            loadQuestion();
+
+        }
+    }
+
+    function createButtons() {
+        questions[i].options.forEach((option) => {
+            optionsDiv.innerHTML += `<button class="option-btn">${option}</button>`
+        });
+
+        var answers = questions[i].options.filter((option) => {
+            return questions[i].answers.includes(option);
+        })
+
+        var buttons = document.querySelectorAll(".option-btn");
+        buttons.forEach((btn) => {
+            if (answers.includes(btn.textContent)) {
+                btn.addEventListener("click", function () {
+                    new Audio("correto.m4a").play();
+                    btn.textContent = "✓";
+                    btn.disabled = true;
+                    disableButtons();
+                    feedback.textContent = "Continue!";
+                    checkResult(answers);
+                });
+            } else {
+                btn.addEventListener("click", function () {
+                    new Audio("errado.m4a").play();
+                    feedback.textContent = "Tente de novo";
+                })
+            }
+        })
+    }
+
+    function loadQuestion() {
+        if (i < questions.length) {
+            optionsDiv.innerHTML = "";
+            imgDiv.innerHTML = `<img src="${questions[i].imgUrl}" class="gameImg">`;
+            let options = questions[i].options;
+            createButtons();
+        } else {
+            feedback.textContent = "Parabéns, você completou o jogo!";
+            contentDiv.style.display = "none";
+        }
+    }
+
+
+</script>
+
+</html>

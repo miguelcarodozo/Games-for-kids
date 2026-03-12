@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Lógica Matemática - Opções</title>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            text-align: center;
+            margin: 5px 0;
+            color: white;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+            font-weight: 700;
+            letter-spacing: 2px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        #content {
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 25px;
+            margin: 10px 0;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease;
+            max-width: 1100px;
+            width: 95%;
+            max-height: 65vh;
+        }
+
+        #img1 {
+            width: 500px;
+            /* Aumentado significativamente */
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+            animation: flipIn 0.6s ease;
+            object-fit: cover;
+        }
+
+        #img1:hover {
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 12px;
+            /* Reduzido */
+            padding: 10px;
+            flex: 1;
+        }
+
+        form p {
+            font-size: 1.5rem;
+            /* Reduzido */
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form label {
+            font-size: 1.2rem;
+            /* Reduzido */
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            /* Reduzido */
+            padding: 8px 15px;
+            /* Reduzido */
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 40px;
+            /* Reduzido */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        form label:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateX(5px);
+            border-color: #ffd93d;
+        }
+
+        form input[type="radio"] {
+            width: 16px;
+            /* Reduzido */
+            height: 16px;
+            /* Reduzido */
+            cursor: pointer;
+            accent-color: #ffd93d;
+            transform: scale(1.1);
+            /* Reduzido */
+            margin-right: 5px;
+            /* Reduzido */
+        }
+
+        form input[type="radio"]:checked {
+            accent-color: #4CAF50;
+        }
+
+        #feedback {
+            text-align: center;
+            margin-top: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+            width: 100%;
+        }
+
+        #confirmBtn {
+            padding: 12px 40px;
+            font-size: 1.6rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            min-width: 220px;
+            background: linear-gradient(145deg, #4CAF50, #45a049);
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+        }
+
+        #confirm:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.4);
+        }
+
+        #confirm:active {
+            transform: scale(0.95);
+        }
+
+        #answer {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+            min-height: 45px;
+            animation: glow 2s ease-in-out infinite;
+            padding: 5px;
+        }
+
+        /* Animações */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes flipIn {
+            from {
+                opacity: 0;
+                transform: perspective(400px) rotateX(90deg);
+            }
+
+            to {
+                opacity: 1;
+                transform: perspective(400px) rotateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            50% {
+                box-shadow: 0 12px 25px rgba(255, 255, 255, 0.4);
+            }
+
+            100% {
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+            }
+
+            50% {
+                text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 2px 2px 0 rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* Telas médias */
+        @media (max-height: 700px) {
+            h1 {
+                font-size: 2.2rem;
+                margin: 2px 0;
+            }
+
+            #img1 {
+                width: 400px;
+                /* Mantém proporcionalmente maior */
+            }
+
+            form p {
+                font-size: 1.3rem;
+            }
+
+            form label {
+                font-size: 1.1rem;
+                padding: 6px 12px;
+            }
+
+            #confirmBtn {
+                padding: 8px 30px;
+                font-size: 1.4rem;
+                min-width: 200px;
+            }
+
+            #answer {
+                font-size: 1.5rem;
+                min-height: 35px;
+            }
+        }
+
+        /* Telas muito pequenas */
+        @media (max-height: 600px) {
+            body {
+                padding: 5px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin: 0;
+            }
+
+            #content {
+                padding: 15px;
+                gap: 15px;
+            }
+
+            #img1 {
+                width: 300px;
+                /* Ainda maior proporcionalmente */
+            }
+
+            form {
+                gap: 6px;
+            }
+
+            form p {
+                font-size: 1.1rem;
+                margin-bottom: 2px;
+            }
+
+            form label {
+                font-size: 1rem;
+                padding: 5px 10px;
+            }
+
+            #confirmBtn {
+                padding: 6px 25px;
+                font-size: 1.2rem;
+                min-width: 180px;
+            }
+
+            #answer {
+                font-size: 1.2rem;
+                min-height: 30px;
+            }
+        }
+
+        /* Telas em modo paisagem */
+        @media (max-width: 900px) and (orientation: landscape) {
+            h1 {
+                font-size: 1.8rem;
+                margin: 2px 0;
+            }
+
+            #content {
+                max-height: 70vh;
+            }
+
+            #img1 {
+                width: 350px;
+            }
+
+            form p {
+                font-size: 1.1rem;
+            }
+
+            form label {
+                font-size: 1rem;
+                padding: 5px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Lógica matemática</h1>
+    <div id="content">
+        <img id="img1"
+            src="https://carrefourbr.vtexassets.com/arquivos/ids/132929008/9b0a3c51165a47e286e3c0ea840bcb5a.jpg?v=638334528329530000">
+        <form>
+            <p>Quantos blocos tem na imagem?</p>
+
+            <label for="opcao1">
+                <input type="radio" id="opcao1" name="opcao" value="1" checked>
+                14
+            </label>
+
+            <label for="opcao2">
+                <input type="radio" id="opcao2" name="opcao" value="2">
+                12
+            </label>
+
+            <label for="opcao3">
+                <input type="radio" id="opcao3" name="opcao" value="3">
+                13
+            </label>
+        </form>
+    </div>
+    <div id="feedback">
+        <button type="button" id="confirmBtn">Confirmar</button>
+        <p id="answer"></p>
+    </div>
+
+    <script>
+        var confirmBtn = document.getElementById("confirmBtn");
+        const radio1 = document.getElementById("opcao1");
+        const radio2 = document.getElementById("opcao2");
+        const radio3 = document.getElementById("opcao3");
+        const text = document.getElementById("answer");
+
+        confirmBtn.onclick = function () {
+
+            if (radio1.checked) {
+                text.textContent = "❌ Errado! Tente novamente.";
+                text.style.color = "#ff6b6b";
+            } else if (radio2.checked) {
+                text.textContent = "✅ Correto! Parabéns!";
+                text.style.color = "#4ecdc4";
+                confirmBtn.onclick = function () {
+                    window.location.href = "mat.html";
+                };
+                confirmBtn.textContent = "Próximo";
+
+            } else if (radio3.checked) {
+                text.textContent = "❌ Errado! Tente novamente.";
+                text.style.color = "#ff6b6b";
+            }
+
+            this.style.transform = "scale(0.95)";
+            setTimeout(() => {
+                this.style.transform = "scale(1)";
+            }, 200);
+        }
+    </script>
+</body>
+
+</html>
