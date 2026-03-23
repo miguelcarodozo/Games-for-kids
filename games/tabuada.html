@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Jogo para aprender</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+
+        #content{
+            align-items: center;
+        }
+        
+        button {
+            padding: 8px;
+            font-size: 2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            display: flex;
+        }
+
+        #options {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        #questions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+            width: 460px;
+            text-align: center;
+            padding: 30px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            justify-content: center;
+        }
+
+        #questions p {
+            margin: 0;
+            padding: 10px;
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            cursor: pointer;
+        }
+
+        #questions p.active {
+            color: #ffd93d;
+            background: rgba(255, 217, 61, 0.2);
+            text-shadow: 0 0 10px rgba(255, 217, 61, 0.5);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #questions p.completed {
+            text-decoration: line-through;
+            text-decoration-thickness: 2px;
+            text-decoration-color: #00b894;
+            color: #a8e6cf;
+        }
+
+        #buttons {
+            text-align: center;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            margin: 10px 0;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            height: fit-content;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .numbers {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            justify-content: center;
+            align-items: center;
+            background: #ffd93d;
+            color: white;
+            transform: scale(1);
+        }
+
+        .numbers:hover {
+            transform: scale(1.1);
+            background: linear-gradient(145eg, #ffb347, #ff8c42);
+        }
+
+        .numbers:disabled {
+            background: #c0c0c0;
+            color: #666;
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: scale(0.95);
+            box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="title">Tabuada</h1>
+    <h3 id="feedback">Escolha um número:</h3>
+    <div id="options"></div>
+    <div id="content" style="display: none; gap: 30px;">
+        <div id="questions"></div>
+        <div id="buttons"></div>
+    </div>
+
+</body>
+<footer>
+    <p>@ Miguel Cardozo - 2026</p>
+    <a href="https://www.linkedin.com/in/miguelcardozo-">
+        <img src="https://img.icons8.com/?size=100&id=102748&format=png&color=FFFFFF" width="20px">
+    </a>
+    <a href="https://github.com/miguelcarodozo">
+        <img src="https://img.icons8.com/?size=100&id=12599&format=png&color=FFFFFF" width="20px">
+    </a>
+</footer>
+<script>
+    const options = document.getElementById('options');
+    const content = document.getElementById("content");
+    const buttons = document.getElementById("buttons");
+    const feedback = document.getElementById("feedback");
+    const title = document.getElementById("title");
+    const questions = document.getElementById("questions");
+
+    let answers;
+    let completed = 0;
+
+    function createOptions() {
+        for (let i = 1; i <= 10; i++) {
+            const option = document.createElement('button');
+            option.classList.add("numbers");
+            option.textContent = i;
+            option.id = `${i}option`;
+            options.appendChild(option);
+            option.addEventListener('click', () => {
+                option.disabled = true;
+                completed++;
+                createExercise(i);
+            });
+        }
+    }
+
+    createOptions();
+
+    function shuffle(arr) {
+        for (let i = 0; i < arr.length; i++) {
+            let random = Math.floor(Math.random() * arr.length);
+            let temp = arr[i];
+            arr[i] = arr[random];
+            arr[random] = temp;
+        }
+    }
+
+    function createExercise(i) {
+
+        options.style.display = 'none';
+        content.style.display = "flex";
+
+        answers = [];
+        let fase = 1;
+
+        for (let j = 1; j <= 10; j++) {
+            answers.push(i * j);
+            questions.innerHTML += `<p id=${j}>${i} X ${j} = ?</p>`;
+        }
+        document.getElementById("1").classList.add("active");
+
+        feedback.textContent = `Vamos fazer a tabuada do ${i}`;
+
+        shuffle(answers);
+
+        for (let j = 0; j < answers.length; j++) {
+            const button = document.createElement("button");
+            button.textContent = answers[j];
+            button.id = `${answers[j]}btn`;
+            button.classList.add("numbers");
+            buttons.appendChild(button);
+            button.onclick = function () {
+                if (button.textContent / fase == i) {
+                    document.getElementById(`${fase}`).classList.remove("active");
+                    document.getElementById(`${fase}`).classList.add("completed");
+                    document.getElementById(`${fase}`).textContent = `${i} X ${fase} = ${i * fase}`;
+                    feedback.textContent = "Continue!";
+                    button.disabled = true;
+                    console.log(fase);
+                    if (fase == 10) {
+                        if (completed == 10) {
+                            title.textContent = "Tabuada";
+                            feedback.textContent = "Parabéns, terminou!";
+                            options.style.display = "grid";
+                            content.style.display = "none";
+                            options.innerHTML = "";
+                            const index = document.createElement("a");
+                            index.href = "../index.html";
+                            index.text = "Menu";
+                            index.classList.add("gameLink");
+                            const again = document.createElement("a");
+                            again.href = "";
+                            again.onclick = function(){location.reload()};
+                            again.text = "De novo?";
+                            again.classList.add("gameLink");
+                            document.querySelector("body").appendChild(index);
+                            document.querySelector("body").appendChild(again);
+                            new Audio("../audios/win.wav").play();
+                            return;
+                        } else{
+                            new Audio("../audios/win.wav").play();
+                            feedback.textContent = "Parabéns, você acertou tudo !";
+                            setTimeout(() =>{
+                            feedback.textContent = "Vamos pra próxima!";
+                            title.textContent = "Tabuada";
+                            buttons.innerHTML = "";
+                            questions.innerHTML = "";
+                            options.style.display = "grid";
+                            content.style.display = "none";
+                            }, 2000);
+                            return;
+                        }
+                        
+                    } else {
+                        new Audio("../audios/correto.m4a").play();
+                        fase++;
+                        document.getElementById(`${fase}`).classList.add("active");
+                    }
+                } else {
+                    new Audio("../audios/errado.m4a").play();
+                    feedback.textContent = "Errou, tente de novo!";
+                }
+            }
+        }
+    }
+
+</script>
+
+</html>

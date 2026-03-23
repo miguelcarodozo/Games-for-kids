@@ -1,40 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Letras</title>
+    <link rel="stylesheet" href="base.css">
     <style>
-        * {
-            margin: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: #667eea;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding-bottom: 3rem;
-        }
-
-        h1 {
-            font-size: 4rem;
-            text-align: center;
-            color: white;
-            margin-bottom: 10px;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            text-align: center;
-            color: #ffd93d;
-            margin-bottom: 20px;
-            animation: fadeInDown 0.8s ease 0.1s both;
-        }
-
         #main {
             display: flex;
             flex-direction: row;
@@ -51,13 +21,12 @@
             gap: 15px;
             max-width: 600px;
             padding: 20px;
-            background: rgb(94, 41, 119);
             border-radius: 30px;
             animation: fadeInUp 0.8s ease;
         }
 
         button {
-            padding: 14px;
+            padding: 12px;
             font-size: 2rem;
             font-weight: bold;
             border: none;
@@ -98,21 +67,6 @@
             pointer-events: none;
         }
 
-        footer {
-            display: flex;
-            gap: 20px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #000000;
-            color: white;
-            text-align: center;
-            justify-content: end;
-            padding: 15px;
-            font-weight: bolder;
-        }
-
         #playLetter {
             width: 70px;
             height: 70px;
@@ -120,268 +74,18 @@
             padding: 0;
         }
 
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-            }
-
-            50% {
-                box-shadow: 0 15px 25px rgba(255, 255, 255, 0.3);
-            }
-
-            100% {
-                box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
-            }
-        }
-
-        @keyframes glow {
-
-            0%,
-            100% {
-                text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-            }
-
-            50% {
-                text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 2px 2px 0 rgba(0, 0, 0, 0.3);
-            }
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 3.5rem;
-                margin-top: 20px;
-            }
-
-            h3 {
-                font-size: 2rem;
-                padding: 0 15px;
-            }
-
-            #main {
-                flex-direction: column;
-                gap: 15px;
-                width: 100%;
-                padding: 0 10px;
-            }
-
-            .content {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 12px;
-                padding: 15px;
-                max-width: 100%;
-                margin: 10px 0;
-            }
-
-            button {
-                font-size: 2rem;
-                padding: 18px;
-                min-width: 60px;
-                min-height: 60px;
-            }
-
-            #playLetter {
-                width: 80px;
-                height: 80px;
-                margin: 10px auto;
-            }
-
-            #playLetter img {
-                width: 30px;
-                height: 30px;
-            }
-
-            #startBtn {
-                font-size: 1.8rem;
-                padding: 20px 40px;
-                margin: 20px 0;
-            }
-
-            footer {
-                position: relative;
-                flex-direction: column;
-                gap: 15px;
-                padding: 25px 15px;
-                margin-top: 30px;
-                font-size: 1.4rem;
-                background: #000000;
-                width: 100%;
-            }
-
-            footer a {
-                margin: 5px 0;
-            }
-
-            footer img {
-                width: 30px;
-                height: 30px;
-            }
-
-            footer p {
-                font-size: 1.4rem;
-                margin-bottom: 10px;
-            }
-
-            @media (max-width: 380px) {
-                h1 {
-                    font-size: 2.8rem;
-                }
-
-                h3 {
-                    font-size: 1.6rem;
-                }
-
-                .content {
-                    grid-template-columns: repeat(3, 1fr);
-                    gap: 8px;
-                }
-
-                button {
-                    font-size: 1.8rem;
-                    padding: 15px;
-                }
-
-                footer {
-                    font-size: 1.2rem;
-                }
-            }
-        }
-
-        @media (min-width: 601px) and (max-width: 900px) {
-            h1 {
-                font-size: 4rem;
-            }
-
-            h3 {
-                font-size: 2.2rem;
-            }
-
-            .content {
-                grid-template-columns: repeat(5, 1fr);
-                gap: 15px;
-                max-width: 90%;
-            }
-
-            button {
-                font-size: 2.2rem;
-                padding: 20px;
-            }
-
-            footer {
-                position: relative;
-                padding: 20px;
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (orientation: portrait) {
-
-            body{
-                overflow-y: hidden;
-            }
-
-            h1 {
-                margin: 0;
-                font-size: 6rem;
-            }
-
-            h3 {
-                font-size: 3rem;
-            }
-
-            #main {
-                flex-direction: column;
-                padding: 20px 10px;
-                gap: 15px;
-                width: 70%;
-                margin: 0 auto;
-            }
-
-            .content {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 10px;
-                padding: 15px;
-                width: 100%;
-                max-width: 100%;
-                margin: 5px auto;
-            }
-
-            button {
-                font-size: 2rem;
-                padding: 0;
-                min-width: 50px;
-                min-height: 50px;
-                aspect-ratio: 1;
-            }
-
-            button img {
-                width: 80px !important;
-                height: 80px !important;
-            }
-
-            #playLetter {
-                width: 120px;
-                height: 120px;
-                margin: 10px auto;
-            }
-
-            #playLetter img {
-                width: 80px;
-                height: 80px;
-            }
-
-            #startBtn {
-                font-size: 3rem;
-                padding: 12px 25px;
-                margin: 15px 0;
-                width: auto;
-            }
-
-            footer {
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                flex-direction: column;
-                gap: 10px;
-                padding: 20px 15px;
-                margin-top: 25px;
-                font-size: 3rem;
-                width: 100%;
-                background: #000000;
-            }
-
-            footer a {
-                margin: 3px 0;
-            }
-
-            footer img {
-                width: 50px;
-                height: 50px;
-            }
+        .gameLink {
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: bold;
+            justify-content: center;
+            background: #ffffff;
+            padding: 20px 10px;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
         }
     </style>
 </head>
@@ -487,7 +191,7 @@
         "rgba(51, 255, 87, 1)"
     ]
     function playAuto() {
-        new Audio("audio" + letraAtual + ".m4a").play().catch(error => {
+        new Audio("../audios/audio" + letraAtual + ".m4a").play().catch(error => {
             console.log("Áudio não pôde ser reproduzido automaticamente:", error);
             goal.textContent = "Clique no botão de som para ouvir";
         });
@@ -495,7 +199,7 @@
 
     function playWithDelay() {
         setTimeout(() => {
-            var audio = new Audio("audio" + letraAtual + ".m4a");
+            var audio = new Audio("../audios/audio" + letraAtual + ".m4a");
             audio.load();
             audio.play().catch(e => console.log("Erro ao reproduzir:", e));
         }, 2000);
@@ -540,13 +244,12 @@
             fase.innerHTML += `<button class="${group[randomIndex].name}" style="background-color: ${randomColor}; color: white;">${group[randomIndex].name.toUpperCase()}</button>`;
             group[randomIndex].count++;
         }
-    }
-    createGroups(group1, fase1);
+    } +
+        createGroups(group1, fase1);
     createGroups(group2, fase2);
     createGroups(group3, fase3);
     createGroups(group4, fase4);
 
-    //Para facilitar a fase 1
     var buttonA = document.querySelectorAll(".a");
     buttonA.forEach(button => {
         button.style.backgroundColor = "#ff9999";
@@ -578,6 +281,26 @@
     var quants = [];
     var letters = [];
 
+    function final() {
+        playLetter.classList.add("hidden");
+        fase4.classList.add("hidden");
+        goal.textContent = "Parabéns! Você completou todas as fases!";
+        const index = document.createElement("a");
+        index.href = "../index.html";
+        index.text = "Menu";
+        index.classList.add("gameLink");
+        index.style.marginTop = "20px";
+        const again = document.createElement("a");
+        again.onclick = function(){location.reload()};
+        again.text = "De novo?";
+        again.classList.add("gameLink");
+        again.style.marginTop = "20px";
+
+        document.getElementById("main").innerHTML = "";
+        document.getElementById("main").appendChild(index);
+        document.getElementById("main").appendChild(again);
+    }
+
     groups.forEach(group => {
         group.forEach(letter => {
             quants.push(letter.count);
@@ -590,7 +313,7 @@
         buttons.forEach((button) => {
             button.addEventListener('click', function () {
                 if (index == 0 || quants[index - 1] == 0) {
-                    new Audio("correto.m4a").play().catch(e => console.log("Erro ao reproduzir:", e));
+                    new Audio("../audios/correto.m4a").play().catch(e => console.log("Erro ao reproduzir:", e));
                     button.disabled = true;
                     button.textContent = "";
                     button.innerHTML = `<img width="15px" height="15px" src="https://img.icons8.com/?size=100&id=3061&format=png&color=000000" alt="checked--v1"/>`;
@@ -619,17 +342,14 @@
                             fase4.classList.add("content");
                             goal.textContent = "Excelente! Agora encontre as últimas letras!";
                         } else if (index == letters.length - 1) {
-                            fase4.classList.remove("content");
-                            fase4.classList.add("hidden");
-                            playLetter.classList.add("hidden");
-                            goal.textContent = "Parabéns! Você encontrou todas as letras!";
+                            final();
                         } else {
                             goal.textContent = "Próxima letra!";
                         }
                     }
                 } else {
                     goal.textContent = "Escute o som novamente!";
-                    new Audio("errado.m4a").play().catch(e => console.log("Erro ao reproduzir:", e));
+                    new Audio("../audios/audio/errado.m4a").play().catch(e => console.log("Erro ao reproduzir:", e));
                 }
             })
 

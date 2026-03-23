@@ -5,67 +5,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Game</title>
+    <link rel="stylesheet" href="base.css">
     <style>
-        * {
-            margin: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: #667eea;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding-bottom: 3rem;
-        }
-
-        h1 {
-            font-size: 4rem;
-            text-align: center;
-            color: white;
-            margin-bottom: 10px;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        h3 {
-            font-size: 1.8rem;
-            text-align: center;
-            color: #ffd93d;
-            margin-bottom: 20px;
-            animation: fadeInDown 0.8s ease 0.1s both;
-        }
-
         #content {
             display: none;
             grid-template-columns: repeat(4, 1fr);
-            min-width: 400px;
-            min-height: 100px;
             gap: 15px;
-            padding: 15px;
-            background: rgb(94, 41, 119);
-            border-radius: 30px;
+            padding: 20px;
             animation: fadeInUp 0.8s ease;
+            margin: 0 auto;
         }
 
         .card {
             width: 100px;
             height: 100px;
-            background-color: #fff;
-            border-radius: 8px;
+            border-radius: 25px;
+            background-color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 2rem;
+            font-weight: bold;
             cursor: pointer;
-            border: 2px solid black;
+            transition: all 0.3s ease;
+            color: white;
+            aspect-ratio: 1;
+            border: none;
+            padding: 8px;
         }
 
-        #content img {
-            width: 80px;
-            height: 80px;
+        .card img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .unflipped {
+            background: #ffd93d;
         }
 
         .unflipped img {
@@ -73,9 +50,12 @@
         }
 
         .unflipped p {
-            font-size: 5rem;
-            text-align: center;
+            display: block;
+            font-size: 3rem;
+            margin: 0;
+            color: white;
         }
+
 
         .flipped {
             pointer-events: none;
@@ -89,27 +69,67 @@
             display: none;
         }
 
+        .hit {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
         .hit img {
             display: block;
+
         }
 
         .hit p {
             display: none;
         }
 
-        footer {
-            display: flex;
-            gap: 20px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: #000000;
-            color: white;
+        .desabilitado {
+            pointer-events: none;
+        }
+
+        .gameLink {
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: bold;
+            justify-content: center;
+            background: #ffffff;
+            padding: 20px 10px;
+            border-radius: 10px;
+            margin: 10px;
             text-align: center;
-            justify-content: end;
-            padding: 15px;
-            font-weight: bolder;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .hit {
+            animation: pulse 0.5s ease;
         }
     </style>
 </head>
@@ -119,8 +139,6 @@
     <h3 id="feedback">Aperte o botão pra começar</h3>
     <button id="startButton">Começar</button>
     <div id="content"></div>
-
-    </div>
 </body>
 <footer>
     <p>@ Miguel Cardozo - 2026</p>
@@ -137,13 +155,15 @@
     const startButton = document.getElementById('startButton');
 
     const cards = [
-        ["./siteImages/memoria/raio.png",
-        "./siteImages/memoria/urso.png"],
-        ["./siteImages/memoria/pen.png",
-        "./siteImages/memoria/heart.gif"]
+        ["../siteImages/memoria/raio.png",
+            "../siteImages/memoria/urso.png"],
+        ["../siteImages/memoria/pen.png",
+            "../siteImages/memoria/heart.png"]
         ,
-        ["./siteImages/memoria/cloud.png",
-        "./siteImages/memoria/bola.png"]
+        ["../siteImages/memoria/cloud.png",
+            "../siteImages/memoria/bola.png"],
+        ["../siteImages/memoria/fries.png",
+            "../siteImages/memoria/refri.png"]
     ];
 
     let cardsToAdd;
@@ -151,7 +171,39 @@
     let i = 0;
     let touches = 0;
 
+    function final() {
+        content.style.display = "none";
+        feedback.textContent = "Parabéns, você terminou!";
+        const index = document.createElement("a");
+        index.href = "../index.html";
+        index.text = "Menu";
+        index.classList.add("gameLink");
+        document.querySelector("body").appendChild(index);
+        const game = document.createElement("a");
+        game.href = "";
+        game.onclick = function () { location.reload() };
+        game.textContent = "De novo?";
+        game.classList.add("gameLink");
+        document.querySelector("body").appendChild(game);
+        body.style.display = "flex";
+    }
+
+    function disableButtons() {
+        const cards = document.querySelectorAll(".unflipped");
+        cards.forEach((card) => {
+            card.style.pointerEvents = "none";
+        })
+    }
+
+    function enableButtons() {
+        const cards = document.querySelectorAll(".unflipped");
+        cards.forEach((card) => {
+            card.style.pointerEvents = "auto";
+        })
+    }
+
     function checkResult() {
+        disableButtons();
         const flipped = document.querySelectorAll(".flipped");
         let sources = [];
         flipped.forEach((card) => {
@@ -166,21 +218,34 @@
             flipped.forEach((card) => {
                 card.classList.remove("flipped");
                 card.classList.add("hit");
+                new Audio("../audios/correto.m4a").play();
                 const totalCards = cardsToAdd.length * 2;
                 const hitCards = document.querySelectorAll(".hit").length;
+                enableButtons();
                 if (hitCards == totalCards) {
                     i++;
-                    build();
+                    setTimeout(() => {
+                        build();
+                    }, 2000)
                 }
             })
         } else {
+            new Audio("../audios/errado.m4a");
             flipped.forEach((card) => {
                 setTimeout(() => {
-                card.classList.remove("flipped");
+                    card.classList.remove("flipped");
+                    card.classList.add("unflipped");
+                    enableButtons();
                 }, 1000);
-                card.classList.add("unflipped");
+
             });
         }
+        const cards = document.querySelectorAll(".card");
+        setTimeout(() => {
+            cards.forEach((card) => {
+                card.style.pointerEvents = "auto";
+            })
+        }, 2000);
     }
 
     function createCards() {
@@ -191,10 +256,13 @@
             let card = newCards[random];
             newCards.splice(random, 1);
             content.innerHTML += `
-                    <div class="unflipped card">
+                    <button class="unflipped card">
                         <img src="${card}" alt="card" class="cardImg">
                         <p>?</p>
-                    </div>`;
+                    </button>`;
+            if (i == (cards.length - 1)) {
+                content.style.gridTemplateColumns = "repeat(8, 1fr)"
+            }
         }
     }
 
@@ -216,24 +284,28 @@
             const cardElements = document.querySelectorAll(".unflipped");
 
             cardElements.forEach(card => {
-                card.addEventListener("click", () => {
-                    if (card.classList.contains("hit")) {
+                card.onclick = function () {
+                    if (card.classList.contains("hit") || card.classList.contains("flipped")) {
                         return;
                     }
                     touches++;
+                    card.style.pointerEvents = "none";
                     card.classList.remove("unflipped");
                     card.classList.add("flipped");
                     if (touches == 2) {
                         checkResult();
                     }
-                });
+                }
             });
 
+        } else {
+            final();
         }
     }
 
     startButton.onclick = function () {
         startButton.style.display = "none";
+        feedback.text = "Vamos lá!"
         content.style.display = "grid";
         build();
     }

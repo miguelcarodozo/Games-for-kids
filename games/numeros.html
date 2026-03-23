@@ -2,436 +2,286 @@
 <html lang="pt-br">
 
 <head>
-  <meta charset="utf-8" />
-  <title>Jogo para aprender</title>
-  <style>
-    * {
-      margin: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="utf-8" />
+    <title>Jogo para aprender</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        button {
+            padding: 14px;
+            font-size: 2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #667eea;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 10px;
-    }
+        #results {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+            perspective: 1000px;
+        }
 
-    h1 {
-      font-size: 4rem;
-      text-align: center;
-      color: white;
-      margin-bottom: 10px;
-      animation: fadeInDown 0.8s ease;
-    }
+        .boxes {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border: none;
+            border-radius: 20px;
+            font-size: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+            color: #764ba2;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            animation: flipIn 0.6s ease;
+        }
 
-    h3 {
-      font-size: 1.8rem;
-      text-align: center;
-      color: #ffd93d;
-      margin-bottom: 20px;
-      animation: fadeInDown 0.8s ease 0.1s both;
-    }
+        .boxes:hover {
+            transform: translateY(-5px) rotateX(5deg);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+        }
 
-    button {
-      padding: 14px;
-      font-size: 2rem;
-      font-weight: bold;
-      border: none;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      aspect-ratio: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+        #options {
+            text-align: center;
+            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            margin: 10px 0;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
 
-    }
+        .numbers {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            background: #ffd93d;
+            color: white;
+            transform: scale(1);        
+            animation: fadeInUp 0.8s ease 0.2s both;    
 
-    #results {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-      margin: 15px 0;
-      perspective: 1000px;
-    }
+        }
 
-    .boxes {
-      width: 100px;
-      height: 100px;
-      background: white;
-      border: none;
-      border-radius: 20px;
-      font-size: 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
-      color: #764ba2;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      animation: flipIn 0.6s ease;
-    }
-
-    .boxes:hover {
-      transform: translateY(-5px) rotateX(5deg);
-      box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
-    }
-
-    #options {
-      text-align: center;
-      padding: 15px 25px;
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 60px;
-      margin: 10px 0;
-      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-      animation: fadeInUp 0.8s ease 0.2s both;
-    }
-
-    .numbers {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      font-size: 2rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      background: #ffd93d;
-      color: white;
-      transform: scale(1);
-    }
-
-    .numbers:hover {
-      transform: scale(1.1) rotate(5deg);
-      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
-      background: linear-gradient(145deg, #ffb347, #ff8c42);
-    }
+        .numbers:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(145deg, #ffb347, #ff8c42);
+        }
 
 
-    .numbers:disabled {
-      background: #c0c0c0;
-      color: #666;
-      cursor: not-allowed;
-      opacity: 0.7;
-      transform: scale(0.95);
-      box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.2);
-    }
+        .numbers:disabled {
+            background: #c0c0c0;
+            color: #666;
+            cursor: not-allowed;
+            opacity: 0.7;
+            transform: scale(0.95);
+            box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
 
-    footer {
-      display: flex;
-      gap: 20px;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #000000;
-      color: white;
-      text-align: center;
-      justify-content: end;
-      padding: 15px;
-      font-weight: bolder;
-    }
+        .gameLink {
+            color: #667eea;
+            font-size: 1.5rem;
+            font-weight: bold;
+            justify-content: center;
+            background: #ffffff;
+            padding: 20px 10px;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
 
-
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes flipIn {
-      from {
-        opacity: 0;
-        transform: perspective(400px) rotateX(90deg);
-      }
-
-      to {
-        opacity: 1;
-        transform: perspective(400px) rotateX(0);
-      }
-    }
-
-    @keyframes pulse {
-      0% {
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      }
-
-      50% {
-        box-shadow: 0 12px 25px rgba(255, 255, 255, 0.4);
-      }
-
-      100% {
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-      }
-    }
-
-    @keyframes glow {
-
-      0%,
-      100% {
-        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
-      }
-
-      50% {
-        text-shadow: 0 0 15px rgba(255, 255, 255, 0.8), 2px 2px 0 rgba(0, 0, 0, 0.3);
-      }
-    }
-
-    /* Responsividade */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2.5rem;
-      }
-
-      .boxes {
-        width: 70px;
-        height: 70px;
-        font-size: 2.2rem;
-      }
-
-      #numbers button {
-        width: 60px;
-        height: 60px;
-        font-size: 1.6rem;
-      }
-
-      #confirmBtn {
-        padding: 12px 30px;
-        font-size: 1.4rem;
-        min-width: 180px;
-      }
-
-      #text {
-        font-size: 1.6rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        justify-content: flex-start;
-        /* Em telas muito pequenas, permite rolagem */
-        padding: 5px;
-      }
-
-      h1 {
-        font-size: 2rem;
-        margin: 5px 0;
-      }
-
-      .boxes {
-        width: 50px;
-        height: 50px;
-        font-size: 1.6rem;
-      }
-
-      #numbers button {
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-      }
-
-      #confirmBtn {
-        padding: 10px 20px;
-        font-size: 1.2rem;
-        min-width: 150px;
-      }
-
-      #text {
-        font-size: 1.3rem;
-      }
-    }
-  </style>
+    </style>
 </head>
 
 <body>
-  <h1>Lógica matemática</h1>
-  <h3 id="feedback">Acerte as contas!</h3>
-  <button id="startBtn">Começar</button>
-  <div id="content" style="display: none;">
-    <div id="results"></div>
-    <div id="options"></div>
-  </div>
+    <h1>Lógica matemática</h1>
+    <h3 id="feedback">Coloque os números do maior por menor!</h3>
+    <button id="startBtn">Começar</button>
+    <div id="content" style="display: none;">
+        <div id="results"></div>
+        <div id="options"></div>
+    </div>
 </body>
 <footer>
-  <p>@ Miguel Cardozo - 2026</p>
-  <a href="https://www.linkedin.com/in/miguelcardozo-">
-    <img src="https://img.icons8.com/?size=100&id=102748&format=png&color=FFFFFF" width="20px">
-  </a>
-  <a href="https://github.com/miguelcarodozo">
-    <img src="https://img.icons8.com/?size=100&id=12599&format=png&color=FFFFFF" width="20px">
-  </a>
+    <p>@ Miguel Cardozo - 2026</p>
+    <a href="https://www.linkedin.com/in/miguelcardozo-">
+        <img src="https://img.icons8.com/?size=100&id=102748&format=png&color=FFFFFF" width="20px">
+    </a>
+    <a href="https://github.com/miguelcarodozo">
+        <img src="https://img.icons8.com/?size=100&id=12599&format=png&color=FFFFFF" width="20px">
+    </a>
 </footer>
 <script>
-  const feedback = document.getElementById('feedback');
-  const startBtn = document.getElementById('startBtn');
-  const content = document.getElementById('content');
-  const resultsDiv = document.getElementById('results');
-  const optionsDiv = document.getElementById('options');
+    const feedback = document.getElementById('feedback');
+    const startBtn = document.getElementById('startBtn');
+    const content = document.getElementById('content');
+    const resultsDiv = document.getElementById('results');
+    const optionsDiv = document.getElementById('options');
 
-  let toques = 0;
+    let toques = 0;
 
-  let material = [[], [], [], [], []];
-  let fase = 0;
+    let material = [[], [], [], [], [], [], [], []];
+    let fase = 7;
 
-  function shuffle(arr, fase) {
-    for(let i = 0; i < arr.length; i++){
-      let random = Math.floor(Math.random() * arr.length);
-      let temp = arr[i];
-      arr[i] = arr[random];
-      arr[random] = temp;
-    }
-    for(let i = 0; i < arr.length; i++){
-      material[fase].push(arr[i]);
-    }
-  }
+    let lastNum;
 
-  function buildMaterial() {
-    let newArr = [];
-    switch (fase) {
-      case 0:
-        for (let i = 1; i <= 5; i++) {
-          newArr.push(i);
+    function shuffle(arr, fase) {
+        for (let i = 0; i < arr.length; i++) {
+            let random = Math.floor(Math.random() * arr.length);
+            let temp = arr[i];
+            arr[i] = arr[random];
+            arr[random] = temp;
         }
-        shuffle(newArr, fase);
-        break;
-      case 1:
-        for (let i = 6; i <= 10; i++) {
-          newArr.push(i);
+        for (let i = 0; i < arr.length; i++) {
+            material[fase].push(arr[i]);
         }
-        shuffle(newArr, fase);
-        break;
-      case 2:
-        for (let i = 11; i <= 20; i++) {
-          newArr.push(i);
-        }
-        shuffle(newArr, fase);
-        break;
-      case 3:
-        newArr[0] = Math.floor(Math.random() * 30) + 20;
-        for (let i = 1; i < 10; i++) {
-          let random = Math.floor(Math.random() * 30 + 20);
-          while (newArr.includes(random) ) {
-            random = Math.floor(Math.random() * 30 + 20);  
-          }
-          newArr.push(random);
-        }
-        shuffle(newArr, fase);
-        break;
-      case 4:
-        for (let i = 0; i < 10; i++) {
-          let random;
-          while (newArr.includes(random)) {
-            random = Math.floor(Math.random() * 50);
-            newArr.push(random + 50);
-          }
-        }
-        shuffle(newArr, fase);
-        break;
-    }
-  }
-
-
-
-  function buildingGame() {
-    buildMaterial();
-    material[fase].forEach((num, index) => {
-      const box = document.createElement('div');
-      box.id = `${index}`;
-      box.classList.add('boxes');
-      resultsDiv.appendChild(box);
-
-      const button = document.createElement('button');
-      button.classList.add('numbers');
-      button.textContent = num;
-      optionsDiv.appendChild(button);
-    });
-
-    const buttons = optionsDiv.querySelectorAll('.numbers');
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        button.disabled = true;
-        document.getElementById(toques).textContent = button.textContent;
-        toques++;
-        if (toques == buttons.length) {
-          checkResult();
-        }
-      })
-    });
-  }
-
-  function restart() {
-    const boxes = document.querySelectorAll(".boxes");
-    const nums = document.querySelectorAll(".numbers");
-    boxes.forEach((box) => box.textContent = "");
-    nums.forEach(num => num.disabled = false);
-    toques = 0;
-  }
-
-  function checkResult() {
-    const boxes = document.querySelectorAll(".boxes");
-    let nums = [];
-    boxes.forEach((box) => {
-      nums.push(parseInt(box.textContent));
-    })
-
-    for (let i = 0; i <= boxes.length - 2; i++) {
-      if (nums[i] > nums[i + 1]) {
-        restart();
-        feedback.textContent = "Tente de novo";
-        return;
-      }
     }
 
-    fase++;
-    if (fase > 4) {
-      feedback.textContent = "Parabéns, você completou o jogo!";
-    } else {
-      resultsDiv.innerHTML = "";
-      optionsDiv.innerHTML = "";
-      feedback.textContent = "Parabéns, você passou de fase!";
-      buildingGame();
-      restart();
+    function buildMaterial() {
+        let newArr = [];
+        switch (true) {
+            case fase === 0:
+                for (let i = 1; i <= 5; i++) {
+                    newArr.push(i);
+                }
+                shuffle(newArr, fase);
+                break;
+            case fase === 1:
+                for (let i = 6; i <= 10; i++) {
+                    newArr.push(i);
+                }
+                shuffle(newArr, fase);
+                break;
+            case fase === 2:
+                for (let i = 11; i <= 17; i++) {
+                    newArr.push(i);
+                }
+                shuffle(newArr, fase);
+                break;
+            case fase >= 3:
+                newArr[0] = 20 + 1;
+                for (let i = 1; i < 8; i++) {
+                    let random = Math.floor(Math.random() * 2) + newArr[i - 1] + 1;
+                    newArr.push(random);
+                }
+                shuffle(newArr, fase);
+                break;
+        }
+    }
+
+    function buildingGame() {
+        buildMaterial();
+        var order = material[fase].slice().sort((a, b) => a - b);
+        material[fase].forEach((num, index) => {
+            const box = document.createElement('div');
+            box.id = `${index}`;
+            box.classList.add('boxes');
+            resultsDiv.appendChild(box);
+
+            const button = document.createElement('button');
+            button.classList.add('numbers');
+            button.textContent = num;
+            optionsDiv.appendChild(button);
+        });
+
+        const buttons = optionsDiv.querySelectorAll('.numbers');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.disabled = true;
+                document.getElementById(toques).textContent = button.textContent;
+                toques++;
+                checkResult(order);
+            })
+        });
+    }
+
+    function restart() {
+        const boxes = document.querySelectorAll(".boxes");
+        const nums = document.querySelectorAll(".numbers");
+        boxes.forEach((box) => box.textContent = "");
+        nums.forEach(num => num.disabled = false);
+        toques = 0;
+    }
+
+    function checkResult(order) {
+        let condition = true;
+        console.log(toques);
+        for (let i = 0; i < toques; i++) {
+            if (document.getElementById(i).textContent != order[i]) {
+                condition = false;
+                break;
+            }
+        }
+
+        if (condition == false) {
+            const boxErrada = document.getElementById(toques - 1);
+            const numbers = optionsDiv.querySelectorAll('.numbers');
+            new Audio('../audios/errado.m4a').play();
+
+            numbers.forEach(num => {
+                if (num.textContent == boxErrada.textContent) {
+                    num.disabled = false;
+                    boxErrada.textContent = "";
+                    toques--;
+                    return;
+                }
+            });
+        } else {
+        if (toques == order.length) {
+            fase++;
+            if (fase >= 7) {
+                feedback.textContent = "Parabéns, você completou o jogo!";
+                const index = document.createElement("a");
+                index.href = "../index.html";
+                index.text = "Menu";
+                index.classList.add("gameLink");
+                optionsDiv.style.display = 'none';
+                resultsDiv.innerHTML = "";
+                resultsDiv.appendChild(index);
+            } else {
+                lastNum = order[order.length - 1];
+                resultsDiv.innerHTML = "";
+                optionsDiv.innerHTML = "";
+                feedback.textContent = "Parabéns, você passou de fase!";
+                new Audio('../audios/correto.m4a').play();
+                buildingGame();
+                restart(toques);
+            }
+        }
     }
     return;
-  }
+    }
 
-  startBtn.addEventListener('click', () => {
-    startBtn.style.display = 'none';
-    feedback.textContent = 'Resolva as contas!';
-    content.style.display = "block";
-    buildingGame();
-  });
+    startBtn.addEventListener('click', () => {
+        startBtn.style.display = 'none';
+        feedback.textContent = 'Resolva as contas!';
+        content.style.display = "block";
+        buildingGame();
+    });
 
 </script>
 

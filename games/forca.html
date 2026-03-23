@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Forca</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        #content,
+        #feedback {
+            animation: fadeInUp 0.8s ease;
+        }
+
+        #lettersDiv {
+            display: "flex";
+            gap: "5px";
+            justify-content: "center";
+            align-items: center;
+        }
+
+        #lettersDiv p {
+            width: 60px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        #letraForm {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        #letraForm label {
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+
+        #letra {
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            text-align: center;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            width: 80px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        #letra:focus {
+            outline: none;
+            transform: scale(1.05);
+            background: white;
+        }
+
+        #letraForm button {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a5a);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Forca</h1>
+    <h3 id="feedback" style="display: flex; gap: 5px;">Aperte para começar!</h3>
+    <button id="startButton">Começar</button>
+    <div id="content" style="display: none;">
+        <div id="output" style="display: flex; gap: 30px; align-items: end;">
+            <canvas id="forcaCanvas" width="260px" height="260px"></canvas>
+            <div id="lettersDiv"></div>
+        </div>
+        <form id="letraForm" style="text-align: center; padding: 20px;">
+            <label for="letra">DIGITE UMA LETRA:</label>
+            <input type="text" id="letra" name="letra" maxlength="1" required>
+            <button type="submit">ENVIAR</button>
+        </form>
+    </div>
+</body>
+<footer>
+    <p>@ Miguel Cardozo - 2026</p>
+    <a href="https://www.linkedin.com/in/miguelcardozo-">
+        <img src="https://img.icons8.com/?size=100&id=102748&format=png&color=FFFFFF" width="20px">
+    </a>
+    <a href="https://github.com/miguelcarodozo">
+        <img src="https://img.icons8.com/?size=100&id=12599&format=png&color=FFFFFF" width="20px">
+    </a>
+</footer>
+<script>
+    const feedback = document.getElementById("feedback");
+    const content = document.getElementById("content");
+    const input = document.getElementById("input");
+    const output = document.getElementById("output");
+    const startBtn = document.getElementById("startButton");
+    const canvas = document.getElementById("forcaCanvas");
+    const ctx = canvas.getContext("2d");
+    const letraForm = document.getElementById("letraForm");
+    const lettersDiv = document.getElementById("lettersDiv");
+    lettersDiv.style.display = "flex";
+    lettersDiv.style.gap = "5px";
+    lettersDiv.style.justifyContent = "center";
+    lettersDiv.style.justifyContent = "center";
+    lettersDiv.style.alignItems = "center";
+
+    function start() {
+        startBtn.style.display = "none";
+        content.style.display = "block";
+        main();
+    }
+
+    function end() {
+        content.style.display = "none";
+        if (words.length >= 1) {
+            const div = document.createElement("div");
+            div.id = "final"
+            div.style.display = "flex";
+            const index = document.createElement("a");
+            index.href = "../index.html";
+            index.text = "Menu";
+            index.classList.add("gameLink");
+            index.style.marginTop = "20px";
+            const again = document.createElement("a");
+
+            again.text = "De novo?";
+            again.classList.add("gameLink");
+            again.style.marginTop = "20px";
+            div.appendChild(index);
+            div.appendChild(again);
+            document.querySelector("body").appendChild(div);
+            again.onclick = function () { content.style.display = "block"; main(); document.querySelector("body").removeChild(document.getElementById("final"))}
+        } else {
+            output.innerHTML = "Você terminou!";
+        }
+    }
+
+    startBtn.onclick = start;
+
+    const words = [
+        "AMOR",
+        "CACHORRO",
+        "COMPUTADOR",
+        "LIVRO",
+        "FLOR",
+        "CAFÉ",
+        "MÚSICA",
+        "PRAIA",
+        "MONTANHA",
+        "AMIZADE",
+        "SOL",
+        "LUA",
+        "ESTRELA",
+        "TEMPO",
+        "FELICIDADE",
+        "SONHO",
+        "VIAGEM",
+        "ESCOLA",
+        "FAMÍLIA",
+        "NATUREZA",
+        "CORPO"
+    ]
+
+    function desenharForca(ctx) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.moveTo(50, 250);
+        ctx.lineTo(250, 250);
+        ctx.stroke();
+
+        ctx.moveTo(150, 250);
+        ctx.lineTo(150, 50);
+        ctx.stroke();
+
+        ctx.moveTo(150, 50);
+        ctx.lineTo(200, 50);
+        ctx.stroke();
+
+        ctx.moveTo(200, 50);
+        ctx.lineTo(200, 80);
+        ctx.stroke();
+
+        if (erros >= 1) {
+            ctx.beginPath();
+            ctx.arc(200, 100, 20, 0, Math.PI * 2);
+            ctx.stroke();
+        }
+
+        if (erros >= 2) {
+            ctx.beginPath();
+            ctx.moveTo(200, 120);
+            ctx.lineTo(200, 180);
+            ctx.stroke();
+        }
+
+        if (erros >= 3) {
+            ctx.beginPath();
+            ctx.moveTo(200, 140);
+            ctx.lineTo(170, 160);
+            ctx.stroke();
+        }
+
+        if (erros >= 4) {
+            ctx.beginPath();
+            ctx.moveTo(200, 140); +
+                ctx.lineTo(230, 160);
+            ctx.stroke();
+        }
+
+        if (erros >= 5) {
+            ctx.beginPath();
+            ctx.moveTo(200, 180);
+            ctx.lineTo(170, 220);
+            ctx.stroke();
+        }
+
+        if (erros >= 6) {
+            ctx.beginPath();
+            ctx.moveTo(200, 180);
+            ctx.lineTo(230, 220);
+            ctx.stroke();
+        }
+    }
+
+    let erros;
+    let filled;
+    let randomWord;
+    let word;
+    let newWord;
+    let wrongLetters;
+    let rightLetters;
+    let triedLetters;
+
+    function removerAcentos(texto) {
+        return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    function main() {
+        erros = 0;
+        filled = 0;
+        randomWord = Math.floor(Math.random() * words.length);
+        console.log(words.length);
+        word = words[randomWord];
+        newWord = removerAcentos(word);
+        wrongLetters = [];
+        rightLetters = [];
+        triedLetters = [];
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        feedback.textContent = "";
+
+        desenharForca(ctx);
+
+        lettersDiv.innerHTML = "";
+
+        for (let i = 0; i < word.length; i++) {
+            const letter = document.createElement("p");
+            letter.textContent = "_";
+            letter.id = `${word}${i}`;
+            letter.style.fontSize = "2.5rem"
+            letter.style.color = "white";
+            letter.style.textDecoration = "underline";
+            lettersDiv.appendChild(letter);
+        }
+        console.log(word);
+        document.getElementById("letraForm").addEventListener("submit", checkResult);
+    }
+
+    function checkResult(event) {
+        event.preventDefault();
+        let letra = document.getElementById("letra").value.toUpperCase();
+        let newLetra = removerAcentos(letra);
+
+        if (/^[A-Za-z]$/.test(newLetra)) {
+            if (triedLetters.includes(newLetra)) {
+                return;
+            } else {
+                triedLetters.push(newLetra);
+                if (newWord.includes(newLetra)) {
+                    for (let i = 0; i < word.length; i++) {
+                        console.log(word[i], newLetra);
+                        if (removerAcentos(word[i]) == newLetra) {
+                            rightLetters.push(newLetra);
+                            document.getElementById(`${word}${i}`).textContent = word[i];
+                            filled += 1;
+                            console.log(filled, word.length);
+                            if (filled == word.length) {
+                                feedback.textContent = "PARABÉNS";
+                                new Audio("../audios/win.wav").play();
+                                setTimeout(() => {
+                                    switchingFases();
+                                }, 2400);
+                            } else {
+                                new Audio("../audios/correto.m4a").play();
+                            }
+                        }
+                    }
+                } else {
+                    wrongLetters.push(newLetra);
+                    feedback.innerHTML = "";
+                    for (let i = 0; i < wrongLetters.length; i++) {
+                        feedback.innerHTML += `<p>${wrongLetters[i]}</p>`;
+                        if (i != wrongLetters.length - 1) {
+                            feedback.innerHTML += "-";
+                        }
+                    }
+
+
+                    erros++;
+                    desenharForca(ctx);
+
+                    if (erros == 6) {
+                        feedback.textContent = `Não conseguiu! A palavra era ${word}`;
+                        new Audio("../audios/loss.wav").play();
+                        setTimeout(() => switchingFases(), 3000)
+                    } else {
+                        new Audio("../audios/errado.m4a").play();
+                    }
+                }
+            }
+        } else {
+            alert("Apenas letras");
+        }
+        document.getElementById("letra").value = "";
+    }
+
+    function switchingFases() {
+        lettersDiv.innerHTML = "";
+        letraForm.removeEventListener("submit", checkResult);
+        feedback.textContent = "Vamos pro próximo!";
+        words.splice(randomWord, 1);
+        end();
+    }
+</script>
+
+
+</html>
