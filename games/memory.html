@@ -182,6 +182,7 @@
         const game = document.createElement("a");
         game.href = "";
         game.onclick = function () { location.reload() };
+        again.style.cursor = "pointer";
         game.textContent = "De novo?";
         game.classList.add("gameLink");
         document.querySelector("body").appendChild(game);

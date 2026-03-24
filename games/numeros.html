@@ -79,8 +79,8 @@
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
             background: #ffd93d;
             color: white;
-            transform: scale(1);        
-            animation: fadeInUp 0.8s ease 0.2s both;    
+            transform: scale(1);
+            animation: fadeInUp 0.8s ease 0.2s both;
 
         }
 
@@ -113,7 +113,6 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-decoration: none;
         }
-
     </style>
 </head>
 
@@ -145,7 +144,7 @@
     let toques = 0;
 
     let material = [[], [], [], [], [], [], [], []];
-    let fase = 7;
+    let fase = 0;
 
     let lastNum;
 
@@ -183,7 +182,7 @@
                 shuffle(newArr, fase);
                 break;
             case fase >= 3:
-                newArr[0] = 20 + 1;
+                newArr[0] = lastNum;
                 for (let i = 1; i < 8; i++) {
                     let random = Math.floor(Math.random() * 2) + newArr[i - 1] + 1;
                     newArr.push(random);
@@ -251,37 +250,51 @@
                 }
             });
         } else {
-        if (toques == order.length) {
-            fase++;
-            if (fase >= 7) {
-                feedback.textContent = "Parabéns, você completou o jogo!";
-                const index = document.createElement("a");
-                index.href = "../index.html";
-                index.text = "Menu";
-                index.classList.add("gameLink");
-                optionsDiv.style.display = 'none';
-                resultsDiv.innerHTML = "";
-                resultsDiv.appendChild(index);
+            if (toques == order.length) {
+                fase++;
+                if (fase >= 7) {
+                    feedback.textContent = "Parabéns, você completou o jogo!";
+                    resultsDiv.innerHTML = "";
+                    optionsDiv.style.display = "none";
+                    const div = document.createElement("div");
+                    div.style.display = "flex";
+                    div.style.animation = "fadeInUp 0.8s ease";
+                    const index = document.createElement("a");
+                    index.href = "../index.html";
+                    index.text = "Menu";
+                    index.classList.add("gameLink");
+                    index.style.marginTop = "20px";
+                    const again = document.createElement("a");
+                    again.onclick = function () { location.reload(); };
+                    again.text = "De novo?";
+                    again.classList.add("gameLink");
+                    again.style.cursor = "pointer";
+                    again.style.marginTop = "20px";
+                    div.appendChild(index);
+                    div.appendChild(again);
+                    resultsDiv.appendChild(div);
+                } else {
+                    lastNum = order[order.length - 1];
+                    resultsDiv.innerHTML = "";
+                    optionsDiv.innerHTML = "";
+                    feedback.textContent = "Parabéns, você passou de fase!";
+                    new Audio('../audios/win.wav').play();
+                    buildingGame();
+                    restart(toques);
+                }
             } else {
-                lastNum = order[order.length - 1];
-                resultsDiv.innerHTML = "";
-                optionsDiv.innerHTML = "";
-                feedback.textContent = "Parabéns, você passou de fase!";
-                new Audio('../audios/correto.m4a').play();
-                buildingGame();
-                restart(toques);
+                new Audio("../audios/correto.m4a").play();
             }
         }
-    }
-    return;
+        return;
     }
 
-    startBtn.addEventListener('click', () => {
+    startBtn.onclick =  function(){
         startBtn.style.display = 'none';
         feedback.textContent = 'Resolva as contas!';
         content.style.display = "block";
         buildingGame();
-    });
+    };
 
 </script>
 

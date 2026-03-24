@@ -6,11 +6,10 @@
     <title>Jogo para aprender</title>
     <link rel="stylesheet" href="base.css">
     <style>
-
-        #content{
+        #content {
             align-items: center;
         }
-        
+
         button {
             padding: 8px;
             font-size: 2rem;
@@ -212,36 +211,40 @@
                         if (completed == 10) {
                             title.textContent = "Tabuada";
                             feedback.textContent = "Parabéns, terminou!";
-                            options.style.display = "grid";
                             content.style.display = "none";
-                            options.innerHTML = "";
+                            options.innerHTML = ""; const div = document.createElement("div");
+                            div.style.display = "flex";
+                            div.style.animation = "fadeInUp 0.8s ease";
                             const index = document.createElement("a");
                             index.href = "../index.html";
                             index.text = "Menu";
                             index.classList.add("gameLink");
+                            index.style.marginTop = "20px";
                             const again = document.createElement("a");
-                            again.href = "";
-                            again.onclick = function(){location.reload()};
+                            again.onclick = function () { location.reload() };
                             again.text = "De novo?";
                             again.classList.add("gameLink");
-                            document.querySelector("body").appendChild(index);
-                            document.querySelector("body").appendChild(again);
+                            again.style.cursor = "pointer";
+                            again.style.marginTop = "20px";
+                            div.appendChild(index);
+                            div.appendChild(again);
+                            document.querySelector("body").appendChild(div);
                             new Audio("../audios/win.wav").play();
                             return;
-                        } else{
+                        } else {
                             new Audio("../audios/win.wav").play();
                             feedback.textContent = "Parabéns, você acertou tudo !";
-                            setTimeout(() =>{
-                            feedback.textContent = "Vamos pra próxima!";
-                            title.textContent = "Tabuada";
-                            buttons.innerHTML = "";
-                            questions.innerHTML = "";
-                            options.style.display = "grid";
-                            content.style.display = "none";
+                            setTimeout(() => {
+                                feedback.textContent = "Vamos pra próxima!";
+                                title.textContent = "Tabuada";
+                                buttons.innerHTML = "";
+                                questions.innerHTML = "";
+                                options.style.display = "grid";
+                                content.style.display = "none";
                             }, 2000);
                             return;
                         }
-                        
+
                     } else {
                         new Audio("../audios/correto.m4a").play();
                         fase++;

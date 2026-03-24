@@ -111,6 +111,7 @@
     const wordsToSelect = [...words];
 
     let fase = 0;
+    let acertos = 0;
     function buildQuestions() {
         if (fase <= 20) {
             let vogais = "AEIOU";
@@ -120,7 +121,6 @@
             let randomWord = Math.floor(Math.random() * wordsToSelect.length);
             let word = wordsToSelect[randomWord];
             wordsToSelect.splice(randomWord, 1);
-
 
             let randomLetter = Math.floor(Math.random() * word.length);
             let letter = word[randomLetter];
@@ -174,7 +174,7 @@
                     if (this.textContent === letter) {
                         feedback.textContent = "Continue!";
                         feedback.style.color = "green";
-
+                        acertos++;
                         displayWord.textContent = word;
 
                         document.querySelectorAll("#content button").forEach(btn => {
@@ -201,8 +201,11 @@
 
             content.appendChild(optionsDiv);
         } else {
+            content.style.display = "none";
+            feedback.textContent = `Você acertou ${acertos}!`; 
             const div = document.createElement("div");
             div.style.display = "flex";
+            div.style.animation = "fadeInUp 0.8s ease";
             const index = document.createElement("a");
             index.href = "../index.html";
             index.text = "Menu";
@@ -212,6 +215,7 @@
             again.onclick = function () { location.reload() };
             again.text = "De novo?";
             again.classList.add("gameLink");
+            again.style.cursor = "pointer";
             again.style.marginTop = "20px";
             div.appendChild(index);
             div.appendChild(again);

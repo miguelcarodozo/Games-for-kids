@@ -117,6 +117,7 @@
     function start() {
         startBtn.style.display = "none";
         content.style.display = "block";
+        feedback.style.color = "#480c3d";
         main();
     }
 
@@ -132,9 +133,10 @@
             index.classList.add("gameLink");
             index.style.marginTop = "20px";
             const again = document.createElement("a");
-
+            again.style.cursor = "pointer";
             again.text = "De novo?";
             again.classList.add("gameLink");
+            div.style.animation = "fadeInUp 0.8s ease";
             again.style.marginTop = "20px";
             div.appendChild(index);
             div.appendChild(again);
@@ -314,7 +316,6 @@
                             feedback.innerHTML += "-";
                         }
                     }
-
 
                     erros++;
                     desenharForca(ctx);
