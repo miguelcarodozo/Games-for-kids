@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Cores</title>
+    <link rel="stylesheet" href="base.css">
+    <style>
+        #content {
+            gap: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+
+            padding: 30px;
+            margin: 20px auto;
+            width: fit-content;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 20px;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+        }
+
+        .cor {
+            width: 90px;
+            height: 90px;
+        }
+
+        button {
+            padding: 14px;
+            font-weight: bold;
+            font-size: 2rem;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            aspect-ratio: 1;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Cores</h1>
+    <h3 id="feedback">Acerte as perguntas</h3>
+    <button id="startButton">
+        <img src="https://img.icons8.com/?size=100&id=9978&format=png&color=000000">
+    </button>
+    <div id="content" style="display: none;">
+    </div>
+</body>
+<footer>
+    <p>@ Miguel Cardozo - 2026</p>
+    <a href="https://www.linkedin.com/in/miguelcardozo-">
+        <img src="https://img.icons8.com/?size=100&id=102748&colorat=png&color=FFFFFF" width="20px">
+    </a>
+    <a href="https://github.com/miguelcarodozo">
+        <img src="https://img.icons8.com/?size=100&id=12599&colorat=png&color=FFFFFF" width="20px">
+    </a>
+</footer>
+<script>
+    const feedback = document.getElementById("feedback");
+    const content = document.getElementById("content");
+    const startBtn = document.getElementById("startButton")
+    startBtn.onclick = function () {
+        startBtn.style.display = "none";
+        content.style.display = "block";
+        main();
+    }
+
+    const coloras = ["círculo", "quadrado", "triângulo", "estrela", "lua", "retângulo", "coração", "flor", "mão", "casa"];
+    const img = ["https://img.icons8.com/?size=100&id=37375&colorat=png&color=000000",      // círculo - preto
+        "https://img.icons8.com/?size=100&id=ApnyC4pGzK23&colorat=png&color=333333", // quadrado - cinza escuro
+        "https://img.icons8.com/?size=100&id=11788&colorat=png&color=2C3E50",     // triângulo - azul petróleo escuro
+        "https://img.icons8.com/?size=100&id=104&colorat=png&color=5D3A1A",       // estrela - marrom escuro
+        "https://img.icons8.com/?size=100&id=26031&colorat=png&color=4A4A4A",     // lua - cinza médio escuro
+        "https://img.icons8.com/?size=100&id=6QZVddZNGBJo&colorat=png&color=1E2A3E", // retângulo - azul noite
+        "https://img.icons8.com/?size=100&id=87&colorat=png&color=8B0000",        // coração - vermelho escuro
+        "https://img.icons8.com/?size=100&id=V0zioVt6bmKv&colorat=png&color=4A2C2C", // flor - vinho escuro
+        "https://img.icons8.com/?size=100&id=KSMw5R43ZXyz&colorat=png&color=5D4037", // mão - marrom café
+        "https://img.icons8.com/?size=100&id=60580&colorat=png&color=1A1A1A"      // casa - cinza quase preto
+    ]
+
+    const colors = [
+        { nome: "vermelho", codigo: "red" },
+        { nome: "verde", codigo: "green" },
+        { nome: "azul", codigo: "blue" },
+        { nome: "amarelo", codigo: "yellow" },
+        { nome: "laranja", codigo: "orange" },
+        { nome: "roxo", codigo: "purple" },
+        { nome: "rosa", codigo: "pink" },
+        { nome: "marrom", codigo: "brown" },
+        { nome: "cinza", codigo: "gray" },
+        { nome: "preto", codigo: "black" },
+        { nome: "branco", codigo: "white" },
+        { nome: "prateado", codigo: "#C0C0C0" },
+        { nome: "violeta", codigo: "#EE82EE" }
+    ];
+
+    let fase = 0;
+    let newcolors;
+
+    function main() {
+
+        content.innerHTML = "";
+        if (fase <= 7) {
+            newcolors = [...colors];
+            let randomcolor = Math.floor(Math.random() * newcolors.length);
+            let color = newcolors[randomcolor];
+            newcolors.splice(randomcolor, 1);
+            colors.splice(randomcolor, 1);
+            let options = [color.codigo];
+            new Audio("../audios/loading.wav").play();
+            setTimeout(() => falarPalavra(color.nome), 500);
+
+
+            for (let i = 0; i < 2; i++) {
+                let randomOp = Math.floor(Math.random() * newcolors.length);
+                options.push(newcolors[randomOp].codigo);
+                newcolors.splice(randomOp, 1);
+            }
+
+            for (let i = 0; i < 2; i++) {
+                let random = Math.floor(Math.random() * 3);
+                let temp = options[i];
+                options[i] = options[random];
+                options[random] = temp;
+            }
+
+            content.style.justifyContent = "center";
+            const soundBtn = document.createElement("button");
+            const img = document.createElement("img");
+
+            img.src = "../siteImages/volume.png";
+            soundBtn.appendChild(img);
+            soundBtn.onclick = function () {
+                falarPalavra(color.nome);
+            }
+            content.appendChild(soundBtn);
+
+            const optionsDiv = document.createElement("div");
+            optionsDiv.style.padding = "20px";
+            optionsDiv.style.display = "flex";
+            optionsDiv.style.gap = "15px";
+            options.forEach((op) => {
+                const opDiv = document.createElement("iv");
+                opDiv.classList.add("cor");
+                opDiv.style.padding = "15px";
+                opDiv.style.backgroundColor = op;
+                opDiv.style.borderRadius = "25px";
+                opDiv.style.animation = "fadeInUp 0.8s ease";
+                optionsDiv.appendChild(opDiv);
+                opDiv.onclick = function () {
+                    checkResult(opDiv, op, color.codigo);
+                }
+
+            })
+            content.appendChild(optionsDiv);
+        } else {
+            new Audio("../audios/win.wav").play();
+            final();
+        }
+    }
+
+    function checkResult(opDiv, option, ans) {
+        opDiv.style.pointerEvents = "none";
+        if (option == ans) {
+            new Audio("../audios/correto.m4a").play();
+            fase++;
+            feedback.textContent = "Certo!";
+            feedback.style.color = "green";
+            opDiv.style.border = "2px solid #4caf50";  // Verde
+            setTimeout(() => {
+                feedback.textContent = "Vamos lá!";
+                feedback.style.color = "#ffd93d";
+                opDiv.style.border = "0px";
+                main();
+            }, 2000)
+        } else {
+            new Audio("../audios/errado.m4a").play();
+            feedback.textContent = "Errado!"; 999
+            feedback.style.color = "red";
+            opDiv.style.border = "2px solid red";
+            opDiv.style.pointerEvents = "auto";
+            setTimeout(() => {
+                feedback.textContent = "Vamos tentar de novo!";
+                opDiv.style.border = "0px";
+
+                feedback.style.color = "#ffd93d";
+            }, 2000)
+        }
+    }
+
+    function final() {
+        content.style.display = "none";
+        const div = document.createElement("div");
+        div.id = "final"
+        div.style.display = "flex";
+        const index = document.createElement("a");
+        index.href = "../index.html";
+        index.text = "Menu";
+        index.classList.add("gameLink");
+        index.style.marginTop = "20px";
+        const again = document.createElement("a");
+        again.style.cursor = "pointer";
+        again.text = "De novo?";
+        again.classList.add("gameLink");
+        div.style.animation = "fadeInUp 0.8s ease";
+        again.style.marginTop = "20px";
+        div.appendChild(index);
+        div.appendChild(again);
+        document.querySelector("body").appendChild(div);
+        again.onclick = function () { location.reload() };
+    }
+
+    function falarPalavra(palavra, idioma = 'pt-BR') {
+        if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+
+            const utterance = new SpeechSynthesisUtterance(palavra);
+            utterance.lang = idioma;
+            utterance.rate = 0.7;      // Mais lento e natural
+            utterance.pitch = 1.2;      // Tom mais agudo (feminino)
+            utterance.volume = 1;
+
+            // Selecionar voz feminina disponível
+            const voices = window.speechSynthesis.getVoices();
+
+            // Tenta encontrar uma voz feminina em português
+            const feminineVoice = voices.find(voice =>
+                (voice.lang === 'pt-BR' && voice.name.includes('Maria')) ||
+                (voice.lang === 'pt-BR' && voice.name.includes('Luciana')) ||
+                (voice.lang === 'pt-BR' && voice.name.includes('Google')) ||
+                (voice.lang === 'pt-BR' && voice.name.includes('Samantha')) ||
+                (voice.lang === 'pt-BR' && voice.name.toLowerCase().includes('female'))
+            );
+
+            if (feminineVoice) {
+                utterance.voice = feminineVoice;
+            }
+
+            window.speechSynthesis.speak(utterance);
+
+            utterance.onerror = (event) => console.error('Erro na fala:', event);
+        } else {
+            alert('Seu navegador não suporta a reprodução de voz');
+        }
+    }
+</script>
+
+</html>

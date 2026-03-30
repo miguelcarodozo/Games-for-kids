@@ -76,7 +76,10 @@
 <body>
     <h1>Forca</h1>
     <h3 id="feedback" style="display: flex; gap: 5px;">Aperte para começar!</h3>
-    <button id="startButton">Começar</button>
+    <button id="startButton">
+        <img src="https://img.icons8.com/?size=100&id=9978&format=png&color=000000">
+
+    </button>
     <div id="content" style="display: none;">
         <div id="output" style="display: flex; gap: 30px; align-items: end;">
             <canvas id="forcaCanvas" width="260px" height="260px"></canvas>
@@ -123,6 +126,7 @@
 
     function end() {
         content.style.display = "none";
+        feedback.style.color = "";
         if (words.length >= 1) {
             const div = document.createElement("div");
             div.id = "final"
@@ -141,7 +145,7 @@
             div.appendChild(index);
             div.appendChild(again);
             document.querySelector("body").appendChild(div);
-            again.onclick = function () { content.style.display = "block"; main(); document.querySelector("body").removeChild(document.getElementById("final"))}
+            again.onclick = function () { content.style.display = "block"; main(); document.querySelector("body").removeChild(document.getElementById("final")) }
         } else {
             output.innerHTML = "Você terminou!";
         }
@@ -170,9 +174,114 @@
         "ESCOLA",
         "FAMÍLIA",
         "NATUREZA",
-        "CORPO"
+        "CORPO",
+        "ÁGUA",
+        "FOGO",
+        "VENTO",
+        "TERRA",
+        "AZUL",
+        "VERMELHO",
+        "VERDE",
+        "AMARELO",
+        "BRANCO",
+        "PRETO",
+        "GATO",
+        "PÁSSARO",
+        "PEIXE",
+        "ÁRVORE",
+        "MAR",
+        "RIO",
+        "ESTRADA",
+        "CARRO",
+        "AVIÃO",
+        "BOLA",
+        "BONECA",
+        "DADO",
+        "JOGO",
+        "PAPEL",
+        "LÁPIS",
+        "CANETA",
+        "BORRACHA",
+        "MOCHILA",
+        "CADERNO",
+        "PROFESSOR",
+        "ALUNO",
+        "SALA",
+        "QUADRO",
+        "GIZ",
+        "MATEMÁTICA",
+        "PORTUGUÊS",
+        "CIÊNCIAS",
+        "HISTÓRIA",
+        "ARTE",
+        "MÚSICA",
+        "DANÇA",
+        "TEATRO",
+        "CINEMA",
+        "TELEVISÃO",
+        "CELULAR",
+        "INTERNET",
+        "JANELA",
+        "PORTA",
+        "TELHADO",
+        "PAREDE",
+        "CHÃO",
+        "CADEIRA",
+        "MESA",
+        "SOFÁ",
+        "CAMA",
+        "TRAVESSEIRO",
+        "COBERTOR",
+        "GUARDAROUPA",
+        "GELADEIRA",
+        "FOGÃO",
+        "MICROONDAS",
+        "LIQUIDIFICADOR",
+        "PRATO",
+        "COPO",
+        "GARFO",
+        "COLHER",
+        "FACA",
+        "BANHEIRO",
+        "CHUVEIRO",
+        "TOALHA",
+        "SABONETE",
+        "ESCOVA",
+        "PASTA",
+        "DENTE",
+        "CABELO",
+        "MÃO",
+        "PÉ",
+        "OLHO",
+        "NARIZ",
+        "BOCA",
+        "ORELHA",
+        "BRAÇO",
+        "PERNA",
+        "JOELHO",
+        "CORAÇÃO",
+        "CÉREBRO",
+        "PULMÃO",
+        "ESTÔMAGO",
+        "INTESTINO",
+        "PELE",
+        "OSSO",
+        "SANGUE",
+        "AR",
+        "LUZ",
+        "SOMBRA",
+        "DIA",
+        "NOITE",
+        "MANHÃ",
+        "TARDE",
+        "SEMANA",
+        "MÊS",
+        "ANO",
+        "PRIMAVERA",
+        "VERÃO",
+        "OUTONO",
+        "INVERNO"
     ]
-
     function desenharForca(ctx) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.beginPath();
@@ -285,6 +394,7 @@
 
         if (/^[A-Za-z]$/.test(newLetra)) {
             if (triedLetters.includes(newLetra)) {
+                alert("Tente palavras novas");
                 return;
             } else {
                 triedLetters.push(newLetra);
@@ -316,10 +426,8 @@
                             feedback.innerHTML += "-";
                         }
                     }
-
                     erros++;
                     desenharForca(ctx);
-
                     if (erros == 6) {
                         feedback.textContent = `Não conseguiu! A palavra era ${word}`;
                         new Audio("../audios/loss.wav").play();

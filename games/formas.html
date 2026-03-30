@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Jogo para aprender</title>
+    <title>Formas</title>
     <link rel="stylesheet" href="base.css">
     <style>
         #content {
@@ -11,6 +11,7 @@
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 50px;
+
             padding: 30px;
             margin: 20px auto;
             width: fit-content;
@@ -44,7 +45,7 @@
 </head>
 
 <body>
-    <h1>Perguntas</h1>
+    <h1>Formas</h1>
     <h3 id="feedback">Acerte as perguntas</h3>
     <button id="startButton">Começar</button>
     <div id="content" style="display: none;">
@@ -91,15 +92,15 @@
         { nome: "retângulo", img: "https://img.icons8.com/?size=100&id=6QZVddZNGBJo&format=png&color=800080" }, // roxo
         { nome: "coração", img: "https://img.icons8.com/?size=100&id=87&format=png&color=FF69B4" },        // rosa choque
         { nome: "flor", img: "https://img.icons8.com/?size=100&id=798&format=png&color=000000" },
-        { nome: "mão", img: "https://img.icons8.com/?size=100&id=2727&format=png&color=000000" }, 
-        { nome: "casa", img: "https://img.icons8.com/?size=100&id=60580&format=png&color=808080" }        
+        { nome: "mão", img: "https://img.icons8.com/?size=100&id=2727&format=png&color=000000" },
+        { nome: "casa", img: "https://img.icons8.com/?size=100&id=60580&format=png&color=808080" }
     ];
 
     let fase = 0;
     let newForms;
 
     function main() {
-        
+
         content.innerHTML = "";
         if (fase <= 7) {
             newForms = [...forms];
@@ -167,21 +168,24 @@
             fase++;
             feedback.textContent = "Certo!";
             feedback.style.color = "green";
-            opImg.style.backgroundColor = "green";
+            opImg.style.border = "2px solid #4caf50";  // Verde
             setTimeout(() => {
                 feedback.textContent = "Vamos lá!";
                 feedback.style.color = "#ffd93d";
+                opImg.style.border = "0px";
                 main();
             }, 2000)
         } else {
             new Audio("../audios/errado.m4a").play();
-            feedback.textContent = "Errado!";
+            feedback.textContent = "Errado!"; 999
             feedback.style.color = "red";
-            opImg.style.backgroundColor = "red";
+            opImg.style.border = "2px solid red";
             opImg.style.pointerEvents = "auto";
             setTimeout(() => {
                 opImg.style.backgroundColor = "white";
                 feedback.textContent = "Vamos tentar de novo!";
+                opImg.style.border = "0px";
+
                 feedback.style.color = "#ffd93d";
             }, 2000)
         }

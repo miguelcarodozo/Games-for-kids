@@ -3,6 +3,10 @@
 
 <head>
     <link rel="stylesheet" href="base.css">
+        <title>Matemática
+            
+        </title>
+
     <style>
         #content {
             gap: 30px;
@@ -37,7 +41,7 @@
             text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
             background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
-            padding: 30px 50px;
+            padding: 20px 50px;
             border-radius: 30px;
             border-bottom: 5px solid #ffd93d;
             display: inline-block;
@@ -110,8 +114,10 @@
 
 <body>
     <h1>Lógica matemática</h1>
-    <h3 id="feedback">Acerte as contas</h3>
-    <button id="startButton">Começar</button>
+    <h3 id="feedback">Acerte as contas!</h3>
+    <button id="startButton">
+        <img src="https://img.icons8.com/?size=100&id=9978&format=png&color=000000">
+    </button>
     <div id="content" style="display: none;">
         <div id="main" style="display: flex; justify-content: center;">
             <p id="num1"></p>
@@ -205,24 +211,29 @@
             option.onclick = function () {
                 if (option.textContent == ans) {
                     new Audio("../audios/correto.m4a").play();
+                    feedback.textContent = "Acertou!";
+                    feedback.style.color = "green";
                     correctAns++;
                 } else {
                     feedback.textContent = `A resposta certa era ${ans}!`
+                    feedback.textContent = "Errou!";
+                    feedback.style.color = "red";
                     new Audio("../audios/errado.m4a").play();
 
                 }
                 document.querySelectorAll(".ansOption").forEach((opt) => {
                     if (opt.textContent == ans) {
-                        opt.style.backgroundColor = "green";
+                        opt.style.border = "2px solid green";
+
                     } else {
-                        opt.style.backgroundColor = "red";
+                        opt.style.border = "2px solid red";
                     }
                     opt.disabled = true;
                 });
                 fase++;
                 setTimeout(() => {
-
                     checkFase();
+                    feedback.style.color = "#ffd93d";
                     feedback.textContent = correctAns > 1 ? `${correctAns} acertos!` : `Continue!`;
                 }, 2000)
             }

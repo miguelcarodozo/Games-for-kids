@@ -208,6 +208,7 @@
                     button.disabled = true;
                     console.log(fase);
                     if (fase == 10) {
+
                         if (completed == 10) {
                             title.textContent = "Tabuada";
                             feedback.textContent = "Parabéns, terminou!";
@@ -233,8 +234,9 @@
                             return;
                         } else {
                             new Audio("../audios/win.wav").play();
-                            feedback.textContent = "Parabéns, você acertou tudo !";
+                            feedback.textContent = "Parabéns, você acertou tudo!";
                             setTimeout(() => {
+                                feedback.style.color = "";
                                 feedback.textContent = "Vamos pra próxima!";
                                 title.textContent = "Tabuada";
                                 buttons.innerHTML = "";
@@ -248,11 +250,13 @@
                     } else {
                         new Audio("../audios/correto.m4a").play();
                         fase++;
+                        feedback.style.color = "green";
                         document.getElementById(`${fase}`).classList.add("active");
                     }
                 } else {
                     new Audio("../audios/errado.m4a").play();
                     feedback.textContent = "Errou, tente de novo!";
+                    feedback.style.color = "red";
                 }
             }
         }
